@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Hospitais Catalogados</title>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script>
+        let map;
+
+        // 1. O código começa executando aqui: busca a chave de segurança no arquivo separado
+        fetch('/config/config.json')
+            .then(response => response.json())
+            .then(config => {
+                // Injeta dinamicamente o script do Google Maps usando a chave do JSON
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&callback=initMap`;
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+            })
+            .catch(error => {
+                console.error('Erro ao carregar o arquivo config.json:', error);
+                alert('Não foi possível carregar a chave da API. Verifique o arquivo config.json.');
+            });
+
+        function initMap() {
+            // Coordenada central inicial (Ajuste para a região dos seus hospitais se necessário)
+            const centroInicial = { lat: -23.55052, lng: -46.633308 };
+            
+            // CONFIGURAÇÃO RELEVANTE: Estilo para ESCONDER os pontos de interesse padrão do Google
+            const estilosDoMapa = [
+                {
+                    featureType: "poi", // Points of Interest (Lojas, restaurantes, hospitais padrão, etc)
+                    elementType: "all",
+                    stylers: [{ visibility: "off" }] // Desliga a visibilidade de tudo
+                },
+                {
+                    featureType: "transit", // Estações de metrô/ônibus
+                    elementType: "all",
+                    stylers: [{ visibility: "off" }]
+                }
+            ];
+
+            // Inicializa o mapa com as configurações de estilo aplicadas
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 13,
+                center: centroInicial,
+                styles: estilosDoMapa // Aplica o filtro transparente
+            });
+
+            // Carrega os hospitais do arquivo JSON
+            carregarPontos();
+        }
+
+        function carregarPontos() {
+            fetch('pontos.json')
+                .then(response => response.json())
+                .then(pontos => {
+                    pontos.forEach(ponto => {
+                        
+                        // Cria uma caixinha de texto (InfoWindow) para aparecer o nome ao clicar
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: `<h3>${ponto.nome}</h3>`
+                        });
+
+                        // Cria o marcador clássico (Garante funcionamento imediato)
+                        const marker = new google.maps.Marker({
+                            position: { lat: Number(ponto.lat), lng: Number(ponto.lng) },
+                            map: map,
+                            title: ponto.nome,
+                            // Ícone customizado de hospital (Pode usar uma URL de imagem sua se preferir)
+                            icon: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png' 
+                        });
+
+                        // Faz a caixinha com o nome abrir quando o usuário clicar no hospital
+                        marker.addListener("click", () => {
+                            infoWindow.open({
+                                anchor: marker,
+                                map,
+                            });
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar o JSON:', error);
+                    alert('Erro ao carregar o arquivo pontos.json. Certifique-se de que está rodando o Live Server.');
+                });
+        }
+    </script>
+
+    
+
+</body>
+</html>

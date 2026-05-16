@@ -1,0 +1,2 @@
+python -m streamlit run teste.py
+py -m streamlit run teste.py
