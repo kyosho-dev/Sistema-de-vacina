@@ -1,16 +1,16 @@
 [
   {
-    "nome": "Ponto A",
+    "nome": "Hospital A",
     "lat": -23.55052,
     "lng": -46.633308
   },
   {
-    "nome": "Ponto B",
+    "nome": "Hospital B",
     "lat": -23.55552,
     "lng": -46.638308
   },
   {
-    "nome": "Ponto C",
+    "nome": "Hospital C",
     "lat": -23.56052,
     "lng": -46.643308
   }

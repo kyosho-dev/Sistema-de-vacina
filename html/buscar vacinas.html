@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>VaxWallet - Buscar Vacinas e Clínicas</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+                rel="stylesheet" />
+        <script id="tailwind-config">
+                tailwind.config = {
+                        darkMode: "class",
+                        theme: {
+                                extend: {
+                                        "colors": {
+                                                "on-background": "#1b1b1d",
+                                                "on-tertiary-fixed": "#2d1600",
+                                                "on-secondary": "#ffffff",
+                                                "on-error": "#ffffff",
+                                                "surface-dim": "#dcd9dc",
+                                                "surface-bright": "#fcf8fb",
+                                                "surface": "#fcf8fb",
+                                                "surface-tint": "#005bc1",
+                                                "error": "#ba1a1a",
+                                                "on-secondary-container": "#00732a",
+                                                "inverse-surface": "#303032",
+                                                "inverse-primary": "#adc6ff",
+                                                "background": "#fcf8fb",
+                                                "primary-fixed-dim": "#adc6ff",
+                                                "outline": "#717786",
+                                                "surface-variant": "#e4e2e4",
+                                                "surface-container": "#f0edef",
+                                                "surface-container-high": "#eae7ea",
+                                                "on-primary-fixed": "#001a41",
+                                                "on-primary": "#ffffff",
+                                                "on-tertiary-fixed-variant": "#6a3b00",
+                                                "surface-container-low": "#f6f3f5",
+                                                "primary-container": "#0070eb",
+                                                "primary": "#0058bc",
+                                                "outline-variant": "#c1c6d7",
+                                                "on-tertiary": "#ffffff",
+                                                "inverse-on-surface": "#f3f0f2",
+                                                "tertiary-container": "#ac6300",
+                                                "on-secondary-fixed": "#002107",
+                                                "on-secondary-fixed-variant": "#00531c",
+                                                "secondary": "#006e28",
+                                                "tertiary-fixed": "#ffdcbf",
+                                                "secondary-container": "#6ffb85",
+                                                "surface-container-lowest": "#ffffff",
+                                                "secondary-fixed": "#72fe88",
+                                                "on-error-container": "#93000a",
+                                                "on-surface-variant": "#414755",
+                                                "on-surface": "#1b1b1d",
+                                                "secondary-fixed-dim": "#53e16f",
+                                                "error-container": "#ffdad6",
+                                                "on-tertiary-container": "#fffbff",
+                                                "on-primary-fixed-variant": "#004493",
+                                                "surface-container-highest": "#e4e2e4",
+                                                "tertiary": "#894d00",
+                                                "on-primary-container": "#fefcff",
+                                                "tertiary-fixed-dim": "#ffb874",
+                                                "primary-fixed": "#d8e2ff"
+                                        },
+                                        "borderRadius": {
+                                                "DEFAULT": "0.25rem",
+                                                "lg": "0.5rem",
+                                                "xl": "0.75rem",
+                                                "full": "9999px"
+                                        },
+                                        "spacing": {
+                                                "xs": "4px",
+                                                "xl": "32px",
+                                                "lg": "24px",
+                                                "sm": "8px",
+                                                "md": "16px",
+                                                "gutter": "16px",
+                                                "base": "8px",
+                                                "container-margin": "24px"
+                                        },
+                                        "fontFamily": {
+                                                "title-md": ["Inter"],
+                                                "headline-lg-mobile": ["Inter"],
+                                                "label-sm": ["Inter"],
+                                                "body-lg": ["Inter"],
+                                                "headline-lg": ["Inter"],
+                                                "display-lg": ["Inter"],
+                                                "caption": ["Inter"],
+                                                "body-md": ["Inter"]
+                                        },
+                                        "fontSize": {
+                                                "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                                                "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                                                "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                                                "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                                                "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                                                "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                                                "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                                                "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                                        }
+                                },
+                        },
+                }
+        </script>
+        <style>
+                body {
+                        font-family: 'Inter', sans-serif;
+                }
+
+                .material-symbols-outlined {
+                        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+                        display: inline-block;
+                        line-height: 1;
+                        text-transform: none;
+                        letter-spacing: normal;
+                        word-wrap: normal;
+                        white-space: nowrap;
+                        direction: ltr;
+                }
+
+                .hide-scrollbar::-webkit-scrollbar {
+                        display: none;
+                }
+
+                .hide-scrollbar {
+                        -ms-overflow-style: none;
+                        scrollbar-width: none;
+                }
+        </style>
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen flex">
+        <!-- SideNavBar (Desktop Anchor) -->
+        <aside
+                class="fixed left-0 top-0 h-screen w-64 hidden md:flex flex-col bg-surface-container-low border-r border-outline-variant p-md gap-sm z-50">
+                <div class="mb-xl px-sm">
+                        <h1 class="font-headline-lg text-headline-lg text-primary">VaxWallet</h1>
+                        <p class="font-label-sm text-label-sm text-on-surface-variant">Clinical Care Portal</p>
+                </div>
+                <nav class="flex flex-col gap-xs flex-grow">
+                        <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg"
+                                href="#">
+                                <span class="material-symbols-outlined">dashboard</span>
+                                <span class="font-label-sm text-label-sm">Dashboard</span>
+                        </a>
+                        <a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container rounded-lg font-bold"
+                                href="#">
+                                <span class="material-symbols-outlined">search</span>
+                                <span class="font-label-sm text-label-sm">Buscar Vacinas</span>
+                        </a>
+                        <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg"
+                                href="#">
+                                <span class="material-symbols-outlined">history</span>
+                                <span class="font-label-sm text-label-sm">Vaccine History</span>
+                        </a>
+                        <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg"
+                                href="#">
+                                <span class="material-symbols-outlined">notifications_active</span>
+                                <span class="font-label-sm text-label-sm">Alerts</span>
+                        </a>
+                </nav>
+                <div class="mt-auto flex flex-col gap-xs">
+                        <button
+                                class="bg-primary text-on-primary px-md py-sm rounded-full font-label-sm text-label-sm mb-md hover:opacity-90 transition-opacity">
+                                Schedule Appointment
+                        </button>
+                        <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg"
+                                href="#">
+                                <span class="material-symbols-outlined">help</span>
+                                <span class="font-label-sm text-label-sm">Support</span>
+                        </a>
+                        <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg"
+                                href="#">
+                                <span class="material-symbols-outlined">settings</span>
+                                <span class="font-label-sm text-label-sm">Settings</span>
+                        </a>
+                </div>
+        </aside>
+        <!-- Main Content Area -->
+        <main class="flex-grow md:ml-64 flex flex-col min-h-screen">
+                <!-- TopAppBar (Desktop context) -->
+                <header
+                        class="sticky top-0 bg-surface shadow-sm z-40 px-lg py-sm flex justify-between items-center w-full max-w-[1200px] mx-auto">
+                        <div class="flex items-center gap-md">
+                                <button class="md:hidden p-sm">
+                                        <span class="material-symbols-outlined">menu</span>
+                                </button>
+                                <span class="font-title-md text-title-md text-primary font-bold">VaxWallet</span>
+                        </div>
+                        <div class="flex items-center gap-lg">
+                                <div
+                                        class="hidden md:flex items-center bg-surface-container-low border border-outline-variant rounded-full px-md py-xs w-80">
+                                        <span
+                                                class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+                                        <input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md w-full ml-sm"
+                                                placeholder="Buscar vacinas ou clínicas..." type="text" value="HPV" />
+                                </div>
+                                <div class="flex items-center gap-md">
+                                        <button
+                                                class="text-on-surface-variant hover:bg-surface-container-low p-sm rounded-full transition-colors">
+                                                <span class="material-symbols-outlined">notifications</span>
+                                        </button>
+                                        <div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+                                                <img alt="User Avatar" class="w-full h-full object-cover"
+                                                        data-alt="A professional studio portrait of a friendly male doctor in his 40s, wearing a subtle blue medical scrub. The lighting is soft and high-key, creating a warm and trustworthy atmosphere consistent with a modern healthcare application. The background is a clean, minimalist off-white, focusing entirely on the subject's approachable expression."
+                                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcMRAkUNTlGSM4YZS-AojtjIpvqBrh_bnh97LdqvhY_ClqH6JZ8k_9ME74Mh6DG1KQbCWdOTNgduymby-nDOUNOLB32qU7LxjwIHCIr40PtLcKFm8lY_YgxWsQ5Oc22_wLpm0r5R4G2cH0XKQFFx2uKY-KiyzeJQc01EoqIoejWzramAuxpzfj3pwBq3tSC0h_uh7f8eUC13b7CYa8XWCLpwRb2qa_5LYrJahTkN_jrpKef9jnvqFMp4X4niSavPuPfz08Fenr7vc" />
+                                        </div>
+                                </div>
+                        </div>
+                </header>
+                <!-- Canvas Area -->
+                <div class="flex-grow p-lg max-w-[1200px] mx-auto w-full">
+                        <div class="grid grid-cols-12 gap-lg h-full">
+                                <!-- Left Panel: Search Results & Info -->
+                                <div
+                                        class="col-span-12 lg:col-span-4 flex flex-col gap-lg overflow-y-auto max-h-[calc(100vh-140px)] hide-scrollbar">
+                                        <!-- Selected Vaccine Card -->
+                                        <section
+                                                class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_12px_rgba(0,0,0,0.06)] border-l-4 border-primary">
+                                                <div class="flex justify-between items-start mb-md">
+                                                        <div>
+                                                                <span
+                                                                        class="bg-primary-fixed text-on-primary-fixed px-sm py-xs rounded-lg font-label-sm text-label-sm">Vacina
+                                                                        Selecionada</span>
+                                                                <h2 class="font-title-md text-title-md mt-sm">HPV
+                                                                        (Papilomavírus Humano)</h2>
+                                                        </div>
+                                                        <span class="material-symbols-outlined text-primary">info</span>
+                                                </div>
+                                                <p class="font-body-md text-body-md text-on-surface-variant mb-lg">
+                                                        Protege contra os tipos mais comuns de HPV que podem causar
+                                                        câncer do colo do útero, vulva, vagina e ânus, além de verrugas
+                                                        genitais.
+                                                </p>
+                                                <div class="space-y-sm">
+                                                        <div class="flex items-center gap-sm">
+                                                                <span
+                                                                        class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+                                                                <span class="font-body-md text-body-md text-on-surface">Esquema:
+                                                                        2 a 3 doses</span>
+                                                        </div>
+                                                        <div class="flex items-center gap-sm">
+                                                                <span
+                                                                        class="material-symbols-outlined text-primary text-[20px]">calendar_today</span>
+                                                                <span class="font-body-md text-body-md text-on-surface">Recomendado:
+                                                                        9 a 45 anos</span>
+                                                        </div>
+                                                </div>
+                                        </section>
+                                        <!-- Nearby Hospitals List -->
+                                        <section class="flex flex-col gap-md">
+                                                <h3
+                                                        class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+                                                        Hospitais e Clínicas Próximos</h3>
+                                                <!-- Hospital Card 1 -->
+                                                <div
+                                                        class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:bg-surface-container-low transition-colors cursor-pointer border border-transparent hover:border-primary-fixed">
+                                                        <div class="flex gap-md">
+                                                                <div
+                                                                        class="bg-secondary-container rounded-lg w-12 h-12 flex items-center justify-center flex-shrink-0">
+                                                                        <span
+                                                                                class="material-symbols-outlined text-on-secondary-container">local_hospital</span>
+                                                                </div>
+                                                                <div class="flex-grow">
+                                                                        <h4
+                                                                                class="font-body-lg text-body-lg font-semibold">
+                                                                                Hospital Sírio-Libanês</h4>
+                                                                        <p
+                                                                                class="font-caption text-caption text-on-surface-variant">
+                                                                                Rua Dona Adma Jafet, 91 - Bela Vista</p>
+                                                                        <div class="flex items-center gap-sm mt-xs">
+                                                                                <span
+                                                                                        class="font-label-sm text-label-sm text-secondary">Aberto
+                                                                                        agora</span>
+                                                                                <span
+                                                                                        class="text-outline-variant">•</span>
+                                                                                <span
+                                                                                        class="font-label-sm text-label-sm text-on-surface-variant">0.8
+                                                                                        km</span>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <!-- Hospital Card 2 -->
+                                                <div
+                                                        class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:bg-surface-container-low transition-colors cursor-pointer border border-transparent">
+                                                        <div class="flex gap-md">
+                                                                <div
+                                                                        class="bg-primary-fixed rounded-lg w-12 h-12 flex items-center justify-center flex-shrink-0">
+                                                                        <span
+                                                                                class="material-symbols-outlined text-on-primary-fixed">vaccines</span>
+                                                                </div>
+                                                                <div class="flex-grow">
+                                                                        <h4
+                                                                                class="font-body-lg text-body-lg font-semibold">
+                                                                                Clínica de Vacinação Imune</h4>
+                                                                        <p
+                                                                                class="font-caption text-caption text-on-surface-variant">
+                                                                                Av. Paulista, 1200 - Conj 42</p>
+                                                                        <div class="flex items-center gap-sm mt-xs">
+                                                                                <span
+                                                                                        class="font-label-sm text-label-sm text-secondary">Aberto
+                                                                                        agora</span>
+                                                                                <span
+                                                                                        class="text-outline-variant">•</span>
+                                                                                <span
+                                                                                        class="font-label-sm text-label-sm text-on-surface-variant">1.2
+                                                                                        km</span>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <!-- Hospital Card 3 -->
+                                                <div
+                                                        class="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:bg-surface-container-low transition-colors cursor-pointer border border-transparent">
+                                                        <div class="flex gap-md">
+                                                                <div
+                                                                        class="bg-tertiary-fixed rounded-lg w-12 h-12 flex items-center justify-center flex-shrink-0">
+                                                                        <span
+                                                                                class="material-symbols-outlined text-on-tertiary-fixed">medical_services</span>
+                                                                </div>
+                                                                <div class="flex-grow">
+                                                                        <h4
+                                                                                class="font-body-lg text-body-lg font-semibold">
+                                                                                Hospital Santa Catarina</h4>
+                                                                        <p
+                                                                                class="font-caption text-caption text-on-surface-variant">
+                                                                                Av. Paulista, 200 - Bela Vista</p>
+                                                                        <div class="flex items-center gap-sm mt-xs">
+                                                                                <span
+                                                                                        class="font-label-sm text-label-sm text-on-surface-variant">Fecha
+                                                                                        em 2h</span>
+                                                                                <span
+                                                                                        class="text-outline-variant">•</span>
+                                                                                <span
+                                                                                        class="font-label-sm text-label-sm text-on-surface-variant">1.5
+                                                                                        km</span>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </section>
+                                        <button
+                                                class="w-full bg-surface-container-highest text-on-surface py-md rounded-xl font-label-sm text-label-sm hover:bg-surface-variant transition-colors border border-outline-variant">
+                                                Ver mais resultados
+                                        </button>
+                                </div>
+                                <!-- Right Panel: Interactive Map Area -->
+                                <div class="col-span-12 lg:col-span-8 flex flex-col gap-lg h-full">
+                                        <div
+                                                class="relative w-full h-[500px] lg:h-full min-h-[400px] bg-surface-container-low rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.1)] border border-outline-variant">
+                                                <!-- Simulated Map Interface -->
+                                                <img alt="Map View"
+                                                        class="w-full h-full object-cover opacity-60 mix-blend-multiply"
+                                                        data-alt="A high-quality top-down satellite view of a modern urban city grid with clean streets and organized architectural blocks. The image is stylized with a professional cartography aesthetic, featuring subtle blue and grey tones to match a medical UI. Translucent markers indicating hospitals are overlaid, creating a sense of precision and clinical data visualization. The lighting is even and clear."
+                                                        data-location="Sao Paulo"
+                                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTF4H9GC156D6w9Lx8WfAbaDnc_EKjXTd2vWKYsq2zn-1811DIN-kVjyFS3fDaXk9DxDbd2nlTl4C-BMxgbYgtWGOLHOKlB59HAJ_kGscwaI9l27h4Sfk8UiVIcZCTgnS-HhdwIWlJGmy5lxLECP0PQ2c67iZO9hnC15Hh1LyG6Kno-7r9PGNx4ka_kUhr7Yt-wAQj6lFHolIPXgFNidQzfifSkvUCvjgKeifxAi7ljHtmh7PVWvEyehpo8PR6HLmqU6LpQLRMkJU" />
+                                                <!-- Map Overlay UI -->
+                                                <div class="absolute inset-0 pointer-events-none p-lg">
+                                                        <div class="flex flex-col h-full justify-between">
+                                                                <div
+                                                                        class="flex justify-end gap-sm pointer-events-auto">
+                                                                        <button
+                                                                                class="bg-surface rounded-lg p-sm shadow-md border border-outline-variant">
+                                                                                <span
+                                                                                        class="material-symbols-outlined">my_location</span>
+                                                                        </button>
+                                                                        <button
+                                                                                class="bg-surface rounded-lg p-sm shadow-md border border-outline-variant">
+                                                                                <span
+                                                                                        class="material-symbols-outlined">layers</span>
+                                                                        </button>
+                                                                </div>
+                                                                <div
+                                                                        class="flex flex-col gap-sm items-center justify-center h-full">
+                                                                        <!-- Map Pin 1 -->
+                                                                        <div
+                                                                                class="absolute top-1/4 left-1/3 flex flex-col items-center pointer-events-auto cursor-pointer group">
+                                                                                <div
+                                                                                        class="bg-primary text-on-primary p-xs px-md rounded-full shadow-lg text-label-sm font-label-sm mb-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                                                                                        Sírio-Libanês</div>
+                                                                                <span class="material-symbols-outlined text-primary text-[40px] drop-shadow-lg"
+                                                                                        style="font-variation-settings: 'FILL' 1;">location_on</span>
+                                                                        </div>
+                                                                        <!-- Map Pin 2 -->
+                                                                        <div
+                                                                                class="absolute bottom-1/3 right-1/4 flex flex-col items-center pointer-events-auto cursor-pointer group">
+                                                                                <div
+                                                                                        class="bg-secondary text-on-secondary p-xs px-md rounded-full shadow-lg text-label-sm font-label-sm mb-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                                                                                        Clínica Imune</div>
+                                                                                <span class="material-symbols-outlined text-secondary text-[40px] drop-shadow-lg"
+                                                                                        style="font-variation-settings: 'FILL' 1;">location_on</span>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="flex justify-center pointer-events-auto">
+                                                                        <div
+                                                                                class="bg-surface p-sm px-lg rounded-full shadow-lg border border-outline-variant flex items-center gap-md">
+                                                                                <span
+                                                                                        class="font-label-sm text-label-sm text-on-surface">Mostrando
+                                                                                        12 clínicas próximas a
+                                                                                        você</span>
+                                                                                <div
+                                                                                        class="h-4 w-px bg-outline-variant">
+                                                                                </div>
+                                                                                <button
+                                                                                        class="text-primary font-bold text-label-sm">Refinar
+                                                                                        Busca</button>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <!-- Footer (Shared Component) -->
+                <footer class="mt-auto w-full py-lg border-t border-outline-variant bg-surface-container-lowest">
+                        <div
+                                class="flex flex-col md:flex-row justify-between items-center px-lg max-w-[1200px] mx-auto gap-md">
+                                <span class="font-label-sm text-label-sm text-on-surface-variant">© 2024 VaxWallet.
+                                        Secure Health Data Management.</span>
+                                <div class="flex gap-lg">
+                                        <a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+                                                href="#">Privacy Policy</a>
+                                        <a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+                                                href="#">Terms of Service</a>
+                                        <a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+                                                href="#">Contact Support</a>
+                                </div>
+                        </div>
+                </footer>
+        </main>
+</body>
+
+</html>

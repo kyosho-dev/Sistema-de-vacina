@@ -1,109 +1,382 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+
+<html class="light" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa de Hospitais Catalogados</title>
-    <style>
-        #map {
-            height: 100vh;
-            width: 100%;
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>VaxWallet Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#6a3b00",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#303032",
+                        "surface-container": "#f0edef",
+                        "on-tertiary-container": "#fffbff",
+                        "on-background": "#1b1b1d",
+                        "secondary-fixed": "#72fe88",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1b1b1d",
+                        "on-secondary-container": "#00732a",
+                        "on-primary-container": "#fefcff",
+                        "tertiary": "#894d00",
+                        "primary-container": "#0070eb",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary": "#0058bc",
+                        "on-primary-fixed": "#001a41",
+                        "on-secondary-fixed": "#002107",
+                        "surface-container-highest": "#e4e2e4",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-low": "#f6f3f5",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c1c6d7",
+                        "on-secondary-fixed-variant": "#00531c",
+                        "on-tertiary-fixed": "#2d1600",
+                        "surface-bright": "#fcf8fb",
+                        "surface-dim": "#dcd9dc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e4e2e4",
+                        "outline": "#717786",
+                        "on-primary-fixed-variant": "#004493",
+                        "primary-fixed-dim": "#adc6ff",
+                        "tertiary-fixed": "#ffdcbf",
+                        "secondary-fixed-dim": "#53e16f",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae7ea",
+                        "tertiary-container": "#ac6300",
+                        "background": "#fcf8fb",
+                        "secondary": "#006e28",
+                        "tertiary-fixed-dim": "#ffb874",
+                        "surface-tint": "#005bc1",
+                        "inverse-primary": "#adc6ff",
+                        "on-surface-variant": "#414755",
+                        "inverse-on-surface": "#f3f0f2",
+                        "surface": "#fcf8fb",
+                        "secondary-container": "#6ffb85"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "container-margin": "24px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                },
+            },
         }
+    </script>
+    <style>
         body {
-            margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #F2F2F7;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
     </style>
 </head>
-<body>
 
-    <div id="map"></div>
-
-    <script>
-        let map;
-
-        // 1. O código começa executando aqui: busca a chave de segurança no arquivo separado
-        fetch('/config/config.json')
-            .then(response => response.json())
-            .then(config => {
-                // Injeta dinamicamente o script do Google Maps usando a chave do JSON
-                const script = document.createElement('script');
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${config.apiKey}&callback=initMap`;
-                script.async = true;
-                script.defer = true;
-                document.head.appendChild(script);
-            })
-            .catch(error => {
-                console.error('Erro ao carregar o arquivo config.json:', error);
-                alert('Não foi possível carregar a chave da API. Verifique o arquivo config.json.');
-            });
-
-        function initMap() {
-            // Coordenada central inicial (Ajuste para a região dos seus hospitais se necessário)
-            const centroInicial = { lat: -23.55052, lng: -46.633308 };
-            
-            // CONFIGURAÇÃO RELEVANTE: Estilo para ESCONDER os pontos de interesse padrão do Google
-            const estilosDoMapa = [
-                {
-                    featureType: "poi", // Points of Interest (Lojas, restaurantes, hospitais padrão, etc)
-                    elementType: "all",
-                    stylers: [{ visibility: "off" }] // Desliga a visibilidade de tudo
-                },
-                {
-                    featureType: "transit", // Estações de metrô/ônibus
-                    elementType: "all",
-                    stylers: [{ visibility: "off" }]
-                }
-            ];
-
-            // Inicializa o mapa com as configurações de estilo aplicadas
-            map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 13,
-                center: centroInicial,
-                styles: estilosDoMapa // Aplica o filtro transparente
-            });
-
-            // Carrega os hospitais do arquivo JSON
-            carregarPontos();
-        }
-
-        function carregarPontos() {
-            fetch('pontos.json')
-                .then(response => response.json())
-                .then(pontos => {
-                    pontos.forEach(ponto => {
-                        
-                        // Cria uma caixinha de texto (InfoWindow) para aparecer o nome ao clicar
-                        const infoWindow = new google.maps.InfoWindow({
-                            content: `<h3>${ponto.nome}</h3>`
-                        });
-
-                        // Cria o marcador clássico (Garante funcionamento imediato)
-                        const marker = new google.maps.Marker({
-                            position: { lat: Number(ponto.lat), lng: Number(ponto.lng) },
-                            map: map,
-                            title: ponto.nome,
-                            // Ícone customizado de hospital (Pode usar uma URL de imagem sua se preferir)
-                            icon: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png' 
-                        });
-
-                        // Faz a caixinha com o nome abrir quando o usuário clicar no hospital
-                        marker.addListener("click", () => {
-                            infoWindow.open({
-                                anchor: marker,
-                                map,
-                            });
-                        });
-                    });
-                })
-                .catch(error => {
-                    console.error('Erro ao carregar o JSON:', error);
-                    alert('Erro ao carregar o arquivo pontos.json. Certifique-se de que está rodando o Live Server.');
-                });
-        }
-    </script>
-
-    
-
+<body class="text-on-surface">
+    <!-- Sidebar Navigation -->
+    <nav
+        class="fixed left-0 top-0 h-screen w-64 hidden md:flex flex-col bg-surface-container-low border-r border-outline-variant p-md gap-sm z-40">
+        <div class="px-md py-lg">
+            <h1 class="font-headline-lg text-headline-lg text-primary">VaxWallet</h1>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Clinical Care Portal</p>
+        </div>
+        <div class="flex flex-col gap-xs flex-grow">
+            <!-- Active Tab: Dashboard -->
+            <a class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container rounded-lg font-bold transition-transform scale-95 active:scale-90"
+                href="http://127.0.0.1:5500/html/index.html">
+                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                <span class="font-label-sm text-label-sm">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg"
+                href="http://127.0.0.1:5500/html/Historico de vacina.html">
+                <span class="material-symbols-outlined" data-icon="history">history</span>
+                <span class="font-label-sm text-label-sm">Vaccine History</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg"
+                href="http://127.0.0.1:5500/html/alertas.html">
+                <span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+                <span class="font-label-sm text-label-sm">Alerts</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg"
+                href="http://127.0.0.1:5500/html/perfil.html">
+                <span class="material-symbols-outlined" data-icon="person">person</span>
+                <span class="font-label-sm text-label-sm">Profile</span>
+            </a>
+        </div>
+        <div class="flex flex-col gap-xs border-t border-outline-variant pt-md">
+            <button
+                class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-sm text-label-sm font-bold mb-md hover:opacity-90 transition-opacity">
+                Schedule Appointment
+            </button>
+            <a class="flex items-center gap-md px-md py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="help">help</span>
+                <span class="font-label-sm text-label-sm">Support</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                <span class="font-label-sm text-label-sm">Settings</span>
+            </a>
+        </div>
+    </nav>
+    <!-- Main Content Canvas -->
+    <main class="md:ml-64 min-h-screen">
+        <!-- Top Navigation Bar (Mobile Header/Desktop Actions) -->
+        <header class="sticky top-0 z-30 bg-surface shadow-sm px-lg py-sm flex justify-between items-center">
+            <div class="flex items-center gap-md">
+                <span class="md:hidden material-symbols-outlined text-primary" data-icon="menu">menu</span>
+                <h2 class="font-title-md text-title-md text-primary font-bold">Dashboard Overview</h2>
+            </div>
+            <div class="flex items-center gap-lg">
+                <div
+                    class="hidden md:flex items-center bg-surface-container-low px-md py-xs rounded-full border border-outline-variant">
+                    <span class="material-symbols-outlined text-on-surface-variant mr-sm"
+                        data-icon="search">search</span>
+                    <input class="bg-transparent border-none focus:ring-0 text-body-md w-48"
+                        placeholder="Search records..." type="text" />
+                </div>
+                <div class="flex items-center gap-md">
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-xs rounded-full"
+                        data-icon="notifications">notifications</span>
+                    <div
+                        class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold text-caption">
+                        JD
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="max-w-[1200px] mx-auto p-lg flex flex-col gap-lg">
+            <!-- Hero Stats Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+                <!-- Overall Status Card -->
+                <div
+                    class="md:col-span-8 bg-surface card-shadow rounded-xl p-lg flex flex-col justify-between border-l-4 border-secondary min-h-[240px]">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span
+                                class="px-sm py-xs bg-secondary-container text-on-secondary-container rounded-full font-label-sm text-label-sm">Em
+                                dia</span>
+                            <h3 class="font-headline-lg text-headline-lg mt-sm">Vaccination Status</h3>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-display-lg text-display-lg text-secondary">90%</p>
+                            <p class="font-label-sm text-label-sm text-on-surface-variant">Complete Profile</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-surface-container-highest h-3 rounded-full overflow-hidden mt-lg">
+                        <div class="bg-secondary h-full rounded-full" style="width: 90%;"></div>
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant mt-md">
+                        You're protected against most clinical risks. Complete your remaining dose to reach 100%.
+                    </p>
+                </div>
+                <!-- Next Scheduled Card -->
+                <div
+                    class="md:col-span-4 bg-primary text-on-primary card-shadow rounded-xl p-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-sm opacity-90">
+                            <span class="material-symbols-outlined" data-icon="event">event</span>
+                            <span class="font-label-sm text-label-sm">Next Scheduled</span>
+                        </div>
+                        <h3 class="font-title-md text-title-md mt-md">Influenza (Flu Shot)</h3>
+                        <p class="font-body-md text-body-md opacity-80">October 15, 2024</p>
+                    </div>
+                    <button
+                        class="mt-xl w-full py-sm bg-on-primary text-primary rounded-lg font-bold font-label-sm text-label-sm hover:bg-primary-fixed transition-colors">
+                        View Details
+                    </button>
+                </div>
+                <!-- Quick Actions Grid -->
+                <div class="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+                    <div
+                        class="bg-surface card-shadow rounded-xl p-md flex items-center gap-md hover:bg-surface-container-low cursor-pointer transition-colors border border-outline-variant">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+                            <span class="material-symbols-outlined" data-icon="qr_code_2">qr_code_2</span>
+                        </div>
+                        <div>
+                            <p class="font-title-md text-label-sm font-bold">View QR Code</p>
+                            <p class="font-caption text-caption text-on-surface-variant">Quick verification</p>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-surface card-shadow rounded-xl p-md flex items-center gap-md hover:bg-surface-container-low cursor-pointer transition-colors border border-outline-variant">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+                            <span class="material-symbols-outlined" data-icon="add_task">add_task</span>
+                        </div>
+                        <div>
+                            <p class="font-title-md text-label-sm font-bold">Schedule</p>
+                            <p class="font-caption text-caption text-on-surface-variant">New dose or booster</p>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-surface card-shadow rounded-xl p-md flex items-center gap-md hover:bg-surface-container-low cursor-pointer transition-colors border border-outline-variant">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined" data-icon="download">download</span>
+                        </div>
+                        <div>
+                            <p class="font-title-md text-label-sm font-bold">Download PDF</p>
+                            <p class="font-caption text-caption text-on-surface-variant">Official certificate</p>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-surface card-shadow rounded-xl p-md flex items-center gap-md hover:bg-surface-container-low cursor-pointer transition-colors border border-outline-variant">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined" data-icon="share">share</span>
+                        </div>
+                        <div>
+                            <p class="font-title-md text-label-sm font-bold">Share Record</p>
+                            <p class="font-caption text-caption text-on-surface-variant">Send to physician</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recent Activity & Historical Data -->
+                <div
+                    class="md:col-span-7 bg-surface card-shadow rounded-xl overflow-hidden flex flex-col border border-outline-variant">
+                    <div class="p-lg border-b border-outline-variant flex justify-between items-center">
+                        <h3 class="font-title-md text-title-md">Recent Activity</h3>
+                        <button class="text-primary font-label-sm text-label-sm hover:underline">View All</button>
+                    </div>
+                    <div class="flex flex-col">
+                        <!-- Activity Item 1 -->
+                        <div
+                            class="p-lg flex items-center justify-between border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
+                            <div class="flex items-center gap-md">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+                                    <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                                </div>
+                                <div>
+                                    <p class="font-body-md text-body-md font-bold">COVID-19 Booster Dose</p>
+                                    <p class="font-caption text-caption text-on-surface-variant">Applied by Dr. Sarah
+                                        Miller • City Clinic</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-label-sm text-label-sm font-bold">Aug 12, 2024</p>
+                                <p class="font-caption text-caption text-secondary">Verified</p>
+                            </div>
+                        </div>
+                        <!-- Activity Item 2 -->
+                        <div
+                            class="p-lg flex items-center justify-between hover:bg-surface-container-lowest transition-colors">
+                            <div class="flex items-center gap-md">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+                                    <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                                </div>
+                                <div>
+                                    <p class="font-body-md text-body-md font-bold">Yellow Fever</p>
+                                    <p class="font-caption text-caption text-on-surface-variant">International Travel
+                                        Certification</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-label-sm text-label-sm font-bold">Jan 05, 2024</p>
+                                <p class="font-caption text-caption text-secondary">Verified</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Clinical Reminders / Tips -->
+                <div class="md:col-span-5 flex flex-col gap-lg">
+                    <div class="bg-surface-container-high card-shadow rounded-xl p-lg relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h4 class="font-title-md text-title-md text-on-surface font-bold">Health Tip</h4>
+                            <p class="font-body-md text-body-md text-on-surface-variant mt-sm">
+                                Keeping your digital wallet updated ensures faster check-ins at clinics and
+                                international borders.
+                            </p>
+                        </div>
+                        <div class="absolute -right-4 -bottom-4 opacity-10">
+                            <span class="material-symbols-outlined text-[120px]" data-icon="lightbulb">lightbulb</span>
+                        </div>
+                    </div>
+                    <div class="bg-surface card-shadow rounded-xl p-lg border border-outline-variant">
+                        <h4 class="font-title-md text-title-md mb-md">Clinic Map</h4>
+                        <div class="aspect-video w-full rounded-lg overflow-hidden relative">
+                            <img alt="Clinic Locations" class="w-full h-full object-cover"
+                                data-alt="A clean, minimalist digital map interface showing a suburban area with several clinic locations marked by friendly blue icons. The style is modern and functional with a light color palette and clear typography, reflecting a secure healthcare application dashboard."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPEz9lVzyqdueojCkRjZxVZHJqIbN_qAgjakS3u74791MEPbpKDfcRs98u5-sXAo6cRZctPdDrO8kLPnZ_eqRSrKcp7NfXkNv6m9lG5-hn9fN1qSpaB551ivqAofVS9P0qSLmEdVsFmSy-pQ44vmcWS_XK7WwXmYwCNsmhQsSYmk5171cXYwqGb17dz5xJireXXlCHWB08CF1esWX-DIp4nSpPAZ-NKl3rhHj6lDzmRtCG68UmIbdDGmfXiC5sJgsz49T03LzaLdY" />
+                            <div
+                                class="absolute bottom-md left-md right-md bg-white/90 backdrop-blur-sm p-sm rounded border border-outline-variant">
+                                <p class="font-label-sm text-label-sm font-bold">Nearest Center: Metro Health</p>
+                                <p class="font-caption text-caption">0.8 miles away • Open until 8 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer class="mt-xl border-t border-outline-variant bg-surface-container-lowest py-lg">
+            <div class="max-w-[1200px] mx-auto px-lg flex flex-col md:flex-row justify-between items-center gap-md">
+                <p class="font-caption text-caption text-on-surface-variant">© 2024 VaxWallet. Secure Health Data
+                    Management.</p>
+                <div class="flex gap-lg">
+                    <a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors"
+                        href="#">Privacy Policy</a>
+                    <a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors"
+                        href="#">Terms of Service</a>
+                    <a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors"
+                        href="#">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+    </main>
 </body>
+
 </html>

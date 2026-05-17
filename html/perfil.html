@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Profile - VaxWallet</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#6a3b00",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#303032",
+                        "surface-container": "#f0edef",
+                        "on-tertiary-container": "#fffbff",
+                        "on-background": "#1b1b1d",
+                        "secondary-fixed": "#72fe88",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1b1b1d",
+                        "on-secondary-container": "#00732a",
+                        "on-primary-container": "#fefcff",
+                        "tertiary": "#894d00",
+                        "primary-container": "#0070eb",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary": "#0058bc",
+                        "on-primary-fixed": "#001a41",
+                        "on-secondary-fixed": "#002107",
+                        "surface-container-highest": "#e4e2e4",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-low": "#f6f3f5",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c1c6d7",
+                        "on-secondary-fixed-variant": "#00531c",
+                        "on-tertiary-fixed": "#2d1600",
+                        "surface-bright": "#fcf8fb",
+                        "surface-dim": "#dcd9dc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e4e2e4",
+                        "outline": "#717786",
+                        "on-primary-fixed-variant": "#004493",
+                        "primary-fixed-dim": "#adc6ff",
+                        "tertiary-fixed": "#ffdcbf",
+                        "secondary-fixed-dim": "#53e16f",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae7ea",
+                        "tertiary-container": "#ac6300",
+                        "background": "#fcf8fb",
+                        "secondary": "#006e28",
+                        "tertiary-fixed-dim": "#ffb874",
+                        "surface-tint": "#005bc1",
+                        "inverse-primary": "#adc6ff",
+                        "on-surface-variant": "#414755",
+                        "inverse-on-surface": "#f3f0f2",
+                        "surface": "#fcf8fb",
+                        "secondary-container": "#6ffb85"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "container-margin": "24px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #F2F2F7;
+        }
+    </style>
+</head>
+
+<body class="font-body-md text-on-surface">
+    <!-- SideNavBar (Authority Source: JSON) -->
+    <aside
+        class="fixed left-0 top-0 h-screen w-64 hidden md:flex flex-col bg-surface-container-low border-r border-outline-variant p-md gap-sm z-40">
+        <div class="flex flex-col gap-xs mb-lg px-sm">
+            <span class="font-headline-lg text-headline-lg text-primary">VaxWallet</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant">Clinical Care Portal</span>
+        </div>
+        <nav class="flex flex-col gap-sm flex-grow">
+            <!-- Navigation items with Active state logic: Profile is active -->
+            <a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                <span class="font-label-sm text-label-sm">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="history">history</span>
+                <span class="font-label-sm text-label-sm">Vaccine History</span>
+            </a>
+            <a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+                <span class="font-label-sm text-label-sm">Alerts</span>
+            </a>
+            <a class="flex items-center gap-md p-md bg-primary-container text-on-primary-container rounded-lg font-bold scale-95 transition-transform"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="person">person</span>
+                <span class="font-label-sm text-label-sm">Profile</span>
+            </a>
+        </nav>
+        <button
+            class="bg-primary text-on-primary py-md px-lg rounded-full font-bold mb-lg shadow-sm hover:opacity-90 transition-opacity">
+            Schedule Appointment
+        </button>
+        <footer class="flex flex-col gap-sm border-t border-outline-variant pt-md">
+            <a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-container-high rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="help">help</span>
+                <span class="font-label-sm text-label-sm">Support</span>
+            </a>
+            <a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-container-high rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                <span class="font-label-sm text-label-sm">Settings</span>
+            </a>
+        </footer>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="md:ml-64 min-h-screen">
+        <!-- TopNavBar (Authority Source: JSON) -->
+        <header class="sticky top-0 z-50 bg-surface shadow-sm docked full-width">
+            <div class="flex justify-between items-center w-full px-lg py-sm max-w-[1200px] mx-auto">
+                <div class="md:hidden font-bold text-title-md text-primary">VaxWallet</div>
+                <div class="flex items-center gap-md ml-auto">
+                    <div class="relative hidden sm:block">
+                        <span
+                            class="absolute left-md top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant"
+                            data-icon="search">search</span>
+                        <input
+                            class="bg-surface-container-low border-none rounded-full py-sm pl-xl pr-md text-body-md focus:ring-2 focus:ring-primary w-64"
+                            placeholder="Search records..." type="text" />
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant p-sm hover:bg-surface-container-low transition-colors rounded-full cursor-pointer"
+                        data-icon="notifications">notifications</span>
+                    <div
+                        class="flex items-center gap-sm p-sm hover:bg-surface-container-low transition-colors rounded-full cursor-pointer">
+                        <img alt="User profile avatar"
+                            class="w-8 h-8 rounded-full border border-outline-variant object-cover"
+                            data-alt="A clean, professional headshot of a middle-aged Brazilian man with a friendly expression, set against a soft, out-of-focus clinical office background. The lighting is bright and natural, reflecting a high-quality corporate health environment. The man has short dark hair and is wearing a smart-casual white polo shirt, conveying trust and accessibility in a modern medical context."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH3ivb7QLTlG18ynOzlDhzImAeGz9oKZvqay5tKmdBvHwqUNBfxpXtCg5wsjzh3c5Jde_4LFLJREmMTuwJEwg4c6auLtBdkFKMwp9QNV_NQWwhuPeLsnWDZ7Us2aIJnmqCwrkgPPj04qUhuM-cj0zSU5bRoYmwrv21pDRMia2ujPbZfey4NJkwZsq30ngKJQKo7fF0-wlPPMUf2j4mSgAq3bSwqDuf0XgWf4hdrXOu2frBiyBuv2j1nYcfGX_tGLzslNMGnhNmiIo" />
+                        <span class="font-label-sm hidden lg:block">Ricardo Silva</span>
+                        <span class="material-symbols-outlined text-on-surface-variant"
+                            data-icon="account_circle">account_circle</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="max-w-[1200px] mx-auto p-lg">
+            <!-- Breadcrumbs / Page Header -->
+            <div class="mb-xl">
+                <h1 class="font-headline-lg text-headline-lg text-on-surface">Account Profile</h1>
+                <p class="font-body-md text-on-surface-variant">Manage your digital health records and family
+                    information.</p>
+            </div>
+            <!-- Bento Grid Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+                <!-- Personal Info Card (L-Grid 7) -->
+                <section class="lg:col-span-7 flex flex-col gap-lg">
+                    <div
+                        class="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)] border-l-4 border-primary">
+                        <div class="flex justify-between items-start mb-lg">
+                            <h2 class="font-title-md text-title-md">Personal Information</h2>
+                            <button class="text-primary font-label-sm flex items-center gap-xs hover:underline">
+                                <span class="material-symbols-outlined" data-icon="edit">edit</span> Edit
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+                            <div>
+                                <label class="font-label-sm text-on-surface-variant block mb-xs">Full Name</label>
+                                <p class="font-body-md font-semibold">Ricardo Silva</p>
+                            </div>
+                            <div>
+                                <label class="font-label-sm text-on-surface-variant block mb-xs">CPF (Tax ID)</label>
+                                <p class="font-body-md font-semibold">***.482.908-**</p>
+                            </div>
+                            <div>
+                                <label class="font-label-sm text-on-surface-variant block mb-xs">Date of Birth</label>
+                                <p class="font-body-md font-semibold">October 24, 1982</p>
+                            </div>
+                            <div>
+                                <label class="font-label-sm text-on-surface-variant block mb-xs">Email Address</label>
+                                <p class="font-body-md font-semibold">ricardo.silva@email.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Dependents Management -->
+                    <div class="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
+                        <div class="flex justify-between items-center mb-lg">
+                            <h2 class="font-title-md text-title-md">Family Dependents</h2>
+                            <button
+                                class="bg-secondary-container text-on-secondary-container px-md py-sm rounded-lg font-label-sm flex items-center gap-sm hover:opacity-90 transition-opacity">
+                                <span class="material-symbols-outlined" data-icon="person_add">person_add</span> Add
+                                Dependent
+                            </button>
+                        </div>
+                        <div class="flex flex-col gap-md">
+                            <div
+                                class="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-outline-variant">
+                                <div class="flex items-center gap-md">
+                                    <img alt="Dependent profile" class="w-10 h-10 rounded-full object-cover"
+                                        data-alt="A portrait of a young boy with curly dark hair and a joyful expression, wearing a vibrant yellow t-shirt. The photograph is shot with a shallow depth of field in a bright, sunlit park environment. The colors are warm and saturated, reflecting a sense of childhood health and vitality within a modern clinical app context."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7eNLYfSev4leOX-LWY8Zz_H3ERm5GFc9DrKfJFbwaeSlD0sdFXWwK0viwQ-YCzU6ajAtBtbWqPkaz7TVF1XJAnIQuCKORc1FqvepGNS-nvIcsUZ0AUUNPFVV_HrJkdLvSfsm5nvLS7yZZqu5XMZOQK1qwtS9HDiVViLvJ73i6lRciKGM9EsJnFk5q5f3zz36pghvoJfbW5hw8OUkLJbYHumEaWExYgF5utvoytmPSkOiIO7L0Ty2jri569y7itXs4HoWV9cv51lA" />
+                                    <div>
+                                        <p class="font-body-md font-bold">Enzo Silva</p>
+                                        <p class="font-caption text-on-surface-variant">Son • 8 years old</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-sm">
+                                    <span
+                                        class="bg-secondary/10 text-secondary px-sm py-xs rounded font-caption font-bold">UP
+                                        TO DATE</span>
+                                    <span class="material-symbols-outlined text-on-surface-variant cursor-pointer"
+                                        data-icon="chevron_right">chevron_right</span>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-outline-variant">
+                                <div class="flex items-center gap-md">
+                                    <img alt="Dependent profile" class="w-10 h-10 rounded-full object-cover"
+                                        data-alt="A portrait of a teenage girl with long dark hair, wearing a navy blue school uniform sweater. She is smiling gently in a well-lit indoor setting with clean, minimalist architecture in the background. The lighting is soft and even, creating a professional and trustworthy clinical portrait feel with a modern corporate aesthetic."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVv7281kvkPUUfpCrp9Cn1M_g-FmhWEipMQ8f7rmFTXFxOvG6K0gL0K7Z-A66V4biNwvUyUXhpyJfnHqCo5h7x8GA4FKip1lTAAkCKYlHKZZi1i7gnyj7BbtHpHUrRYvAc_TXDh8gy-nRndzdimaG2CDuFOLt9VYLEFhwiLqa94w7YGmYfmfUV6w_NZyaQyMoisvakLJxI5PBrVyT3LB0NzY_phdKOu0yQlPs5x1hwxq0hH69qrAScTe-ifwhKvCIoqKcAK6wF5iY" />
+                                    <div>
+                                        <p class="font-body-md font-bold">Beatriz Silva</p>
+                                        <p class="font-caption text-on-surface-variant">Daughter • 15 years old</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-sm">
+                                    <span
+                                        class="bg-tertiary/10 text-tertiary px-sm py-xs rounded font-caption font-bold">1
+                                        ALERT</span>
+                                    <span class="material-symbols-outlined text-on-surface-variant cursor-pointer"
+                                        data-icon="chevron_right">chevron_right</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Sidebar Content (L-Grid 5) -->
+                <aside class="lg:col-span-5 flex flex-col gap-lg">
+                    <!-- Digital Health Card -->
+                    <div
+                        class="relative bg-gradient-to-br from-primary to-on-primary-fixed-variant rounded-xl p-xl text-on-primary shadow-[0_8px_24px_rgba(0,88,188,0.25)] overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-xl">
+                        </div>
+                        <div class="relative z-10 flex flex-col gap-lg">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-title-md text-title-md mb-xs">Digital Vax Card</h3>
+                                    <p class="font-caption opacity-80 uppercase tracking-widest">Global Health ID</p>
+                                </div>
+                                <span class="material-symbols-outlined text-[32px]"
+                                    data-icon="contactless">contactless</span>
+                            </div>
+                            <div class="bg-white p-sm rounded-lg self-center shadow-lg">
+                                <!-- QR Code Placeholder -->
+                                <div
+                                    class="w-32 h-32 bg-surface-container-highest flex items-center justify-center border-2 border-dashed border-outline">
+                                    <span class="material-symbols-outlined text-on-surface-variant text-[48px]"
+                                        data-icon="qr_code_2">qr_code_2</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-end border-t border-white/20 pt-md">
+                                <div>
+                                    <p class="font-caption opacity-80">Holder</p>
+                                    <p class="font-body-md font-bold uppercase">Ricardo Silva</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-caption opacity-80">Valid Thru</p>
+                                    <p class="font-body-md font-bold">12/2026</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Administrative Controls -->
+                    <div class="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
+                        <h2 class="font-title-md text-title-md mb-lg">Account Settings</h2>
+                        <div class="flex flex-col gap-sm">
+                            <button
+                                class="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group">
+                                <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary"
+                                    data-icon="security">security</span>
+                                <div class="flex-grow">
+                                    <p class="font-label-sm font-bold">Security &amp; Login</p>
+                                    <p class="font-caption text-on-surface-variant">Password, 2FA, and sessions</p>
+                                </div>
+                                <span class="material-symbols-outlined text-on-surface-variant"
+                                    data-icon="navigate_next">navigate_next</span>
+                            </button>
+                            <button
+                                class="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group">
+                                <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary"
+                                    data-icon="notifications_paused">notifications_paused</span>
+                                <div class="flex-grow">
+                                    <p class="font-label-sm font-bold">Notification Prefs</p>
+                                    <p class="font-caption text-on-surface-variant">Alerts and reminders frequency</p>
+                                </div>
+                                <span class="material-symbols-outlined text-on-surface-variant"
+                                    data-icon="navigate_next">navigate_next</span>
+                            </button>
+                            <button
+                                class="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group">
+                                <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary"
+                                    data-icon="folder_shared">folder_shared</span>
+                                <div class="flex-grow">
+                                    <p class="font-label-sm font-bold">Privacy &amp; Data</p>
+                                    <p class="font-caption text-on-surface-variant">Control who sees your health info
+                                    </p>
+                                </div>
+                                <span class="material-symbols-outlined text-on-surface-variant"
+                                    data-icon="navigate_next">navigate_next</span>
+                            </button>
+                            <div class="pt-md mt-md border-t border-outline-variant">
+                                <button
+                                    class="flex items-center gap-md p-md w-full text-left text-error hover:bg-error-container/20 transition-colors rounded-lg group">
+                                    <span class="material-symbols-outlined" data-icon="logout">logout</span>
+                                    <p class="font-label-sm font-bold">Sign Out</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <!-- Footer (Authority Source: JSON) -->
+        <footer class="mt-xl py-lg bg-surface-container-lowest border-t border-outline-variant full-width">
+            <div class="flex flex-col md:flex-row justify-between items-center px-lg max-w-[1200px] mx-auto gap-md">
+                <span class="font-label-sm text-label-sm text-on-surface-variant">© 2024 VaxWallet. Secure Health Data
+                    Management.</span>
+                <div class="flex gap-lg">
+                    <a class="text-secondary font-caption hover:text-primary transition-colors" href="#">Privacy
+                        Policy</a>
+                    <a class="text-secondary font-caption hover:text-primary transition-colors" href="#">Terms of
+                        Service</a>
+                    <a class="text-secondary font-caption hover:text-primary transition-colors" href="#">Contact
+                        Support</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>

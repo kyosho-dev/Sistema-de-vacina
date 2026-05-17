@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vaccine History - VaxWallet</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#6a3b00",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#303032",
+                        "surface-container": "#f0edef",
+                        "on-tertiary-container": "#fffbff",
+                        "on-background": "#1b1b1d",
+                        "secondary-fixed": "#72fe88",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1b1b1d",
+                        "on-secondary-container": "#00732a",
+                        "on-primary-container": "#fefcff",
+                        "tertiary": "#894d00",
+                        "primary-container": "#0070eb",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary": "#0058bc",
+                        "on-primary-fixed": "#001a41",
+                        "on-secondary-fixed": "#002107",
+                        "surface-container-highest": "#e4e2e4",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-low": "#f6f3f5",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c1c6d7",
+                        "on-secondary-fixed-variant": "#00531c",
+                        "on-tertiary-fixed": "#2d1600",
+                        "surface-bright": "#fcf8fb",
+                        "surface-dim": "#dcd9dc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e4e2e4",
+                        "outline": "#717786",
+                        "on-primary-fixed-variant": "#004493",
+                        "primary-fixed-dim": "#adc6ff",
+                        "tertiary-fixed": "#ffdcbf",
+                        "secondary-fixed-dim": "#53e16f",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae7ea",
+                        "tertiary-container": "#ac6300",
+                        "background": "#fcf8fb",
+                        "secondary": "#006e28",
+                        "tertiary-fixed-dim": "#ffb874",
+                        "surface-tint": "#005bc1",
+                        "inverse-primary": "#adc6ff",
+                        "on-surface-variant": "#414755",
+                        "inverse-on-surface": "#f3f0f2",
+                        "surface": "#fcf8fb",
+                        "secondary-container": "#6ffb85"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "container-margin": "24px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F2F2F7;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .vaccine-card-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+
+<body class="font-body-md text-on-background">
+    <!-- SideNavBar (Shared Component) -->
+    <aside
+        class="fixed left-0 top-0 h-screen w-64 hidden md:flex flex-col bg-surface-container-low dark:bg-surface-container border-r border-outline-variant dark:border-outline p-md gap-sm z-40">
+        <div class="mb-xl px-sm">
+            <h1 class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed-dim">VaxWallet</h1>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Clinical Care Portal</p>
+        </div>
+        <nav class="flex-grow flex flex-col gap-xs">
+            <a class="flex items-center gap-md p-md text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-bright rounded-lg transition-all duration-200 scale-95 active:scale-90"
+                href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-label-sm text-label-sm">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-md p-md bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-lg font-bold transition-all duration-200 scale-95 active:scale-90"
+                href="#">
+                <span class="material-symbols-outlined">history</span>
+                <span class="font-label-sm text-label-sm">Vaccine History</span>
+            </a>
+            <a class="flex items-center gap-md p-md text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-bright rounded-lg transition-all duration-200 scale-95 active:scale-90"
+                href="#">
+                <span class="material-symbols-outlined">notifications_active</span>
+                <span class="font-label-sm text-label-sm">Alerts</span>
+            </a>
+            <a class="flex items-center gap-md p-md text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-bright rounded-lg transition-all duration-200 scale-95 active:scale-90"
+                href="#">
+                <span class="material-symbols-outlined">person</span>
+                <span class="font-label-sm text-label-sm">Profile</span>
+            </a>
+        </nav>
+        <div class="mt-auto border-t border-outline-variant pt-md flex flex-col gap-xs">
+            <button
+                class="mb-md bg-primary text-on-primary py-sm px-md rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity">
+                Schedule Appointment
+            </button>
+            <a class="flex items-center gap-md p-md text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-bright rounded-lg transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined">help</span>
+                <span class="font-label-sm text-label-sm">Support</span>
+            </a>
+            <a class="flex items-center gap-md p-md text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-bright rounded-lg transition-all duration-200"
+                href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-label-sm text-label-sm">Settings</span>
+            </a>
+        </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="md:ml-64 min-h-screen flex flex-col">
+        <!-- TopAppBar (Shared Component) -->
+        <header
+            class="sticky top-0 z-50 bg-surface dark:bg-surface-container-high shadow-sm dark:shadow-none dark:border-b dark:border-outline-variant">
+            <div class="flex justify-between items-center w-full px-lg py-sm max-w-[1200px] mx-auto">
+                <div class="flex items-center gap-md">
+                    <h2 class="text-title-md font-title-md font-bold text-primary dark:text-primary-fixed-dim">Vaccine
+                        History</h2>
+                </div>
+                <div class="flex items-center gap-lg">
+                    <div
+                        class="hidden md:flex items-center bg-surface-container-low px-md py-xs rounded-full border border-outline-variant">
+                        <span class="material-symbols-outlined text-on-surface-variant mr-xs">search</span>
+                        <input class="bg-transparent border-none focus:ring-0 text-body-md w-48"
+                            placeholder="Search records..." type="text" />
+                    </div>
+                    <div class="flex items-center gap-md">
+                        <button
+                            class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low p-xs rounded-full transition-colors">notifications</button>
+                        <button
+                            class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low p-xs rounded-full transition-colors">account_circle</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Content Area -->
+        <section class="p-lg max-w-[1200px] mx-auto w-full flex-grow">
+            <!-- Page Header Actions -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-xl">
+                <div>
+                    <h1 class="font-headline-lg text-headline-lg text-on-surface">Medical Immunization Records</h1>
+                    <p class="font-body-md text-body-md text-on-surface-variant mt-xs">View and manage your verified
+                        vaccination data securely.</p>
+                </div>
+                <button
+                    class="flex items-center gap-sm bg-primary text-on-primary px-lg py-md rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity vaccine-card-shadow">
+                    <span class="material-symbols-outlined">download</span>
+                    Download Full Certificate (PDF)
+                </button>
+            </div>
+            <!-- Search and Filters Bar -->
+            <div
+                class="bg-surface-container-lowest rounded-xl p-md mb-lg flex flex-wrap gap-md items-center vaccine-card-shadow border border-outline-variant">
+                <div class="flex-grow min-w-[240px] relative">
+                    <span
+                        class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">filter_list</span>
+                    <input
+                        class="w-full pl-xl pr-md py-sm rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary bg-surface"
+                        placeholder="Filter by vaccine name or batch..." type="text" />
+                </div>
+                <div class="flex gap-sm">
+                    <select
+                        class="rounded-lg border-outline-variant bg-surface text-label-sm font-label-sm py-sm px-md focus:border-primary focus:ring-primary">
+                        <option>All Years</option>
+                        <option>2024</option>
+                        <option>2023</option>
+                        <option>2022</option>
+                        <option>Prior</option>
+                    </select>
+                    <select
+                        class="rounded-lg border-outline-variant bg-surface text-label-sm font-label-sm py-sm px-md focus:border-primary focus:ring-primary">
+                        <option>All Types</option>
+                        <option>Viral</option>
+                        <option>Bacterial</option>
+                        <option>mRNA</option>
+                    </select>
+                </div>
+                <button class="text-primary font-label-sm text-label-sm px-md hover:underline transition-all">Clear
+                    Filters</button>
+            </div>
+            <!-- Bento-style Grid Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+                <!-- Vaccine Card: COVID-19 (Active/Highlighted) -->
+                <div
+                    class="lg:col-span-2 bg-surface-container-lowest rounded-xl vaccine-card-shadow overflow-hidden border-l-4 border-primary relative">
+                    <div class="p-lg">
+                        <div class="flex justify-between items-start mb-md">
+                            <div class="flex items-center gap-md">
+                                <div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-on-primary-fixed-variant"
+                                        style="font-variation-settings: 'FILL' 1;">coronavirus</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-title-md text-title-md text-on-surface">COVID-19</h3>
+                                    <span
+                                        class="bg-primary-container text-on-primary-container px-sm py-xs rounded-full font-caption text-caption">Complete
+                                        Schedule</span>
+                                </div>
+                            </div>
+                            <span class="font-label-sm text-label-sm text-on-surface-variant">Last Update: Oct
+                                2023</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-md mt-lg">
+                            <div class="p-md bg-surface-container-low rounded-lg border border-outline-variant">
+                                <p class="font-caption text-caption text-on-surface-variant">Dose 1</p>
+                                <p class="font-label-sm text-label-sm font-bold text-on-surface">12/03/2021</p>
+                                <p class="font-caption text-caption text-secondary">Verified</p>
+                            </div>
+                            <div class="p-md bg-surface-container-low rounded-lg border border-outline-variant">
+                                <p class="font-caption text-caption text-on-surface-variant">Dose 2</p>
+                                <p class="font-label-sm text-label-sm font-bold text-on-surface">15/05/2021</p>
+                                <p class="font-caption text-caption text-secondary">Verified</p>
+                            </div>
+                            <div class="p-md bg-primary-container/10 rounded-lg border border-primary/30">
+                                <p class="font-caption text-caption text-primary">Booster (Reforço)</p>
+                                <p class="font-label-sm text-label-sm font-bold text-on-surface">10/10/2023</p>
+                                <p class="font-caption text-caption text-secondary">Verified</p>
+                            </div>
+                        </div>
+                        <div class="mt-lg flex gap-md">
+                            <button
+                                class="text-primary font-label-sm text-label-sm flex items-center gap-xs hover:bg-primary/5 px-sm py-xs rounded transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">visibility</span> View Details
+                            </button>
+                            <button
+                                class="text-primary font-label-sm text-label-sm flex items-center gap-xs hover:bg-primary/5 px-sm py-xs rounded transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">share</span> Share QR Code
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Vaccine Card: Febre Amarela -->
+                <div
+                    class="bg-surface-container-lowest rounded-xl vaccine-card-shadow border-l-4 border-secondary overflow-hidden">
+                    <div class="p-lg">
+                        <div class="flex items-center gap-md mb-md">
+                            <div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center">
+                                <span class="material-symbols-outlined text-on-secondary-container"
+                                    style="font-variation-settings: 'FILL' 1;">vaccines</span>
+                            </div>
+                            <div>
+                                <h3 class="font-title-md text-title-md text-on-surface">Febre Amarela</h3>
+                                <p class="font-caption text-caption text-on-surface-variant">Single Dose Lifetime</p>
+                            </div>
+                        </div>
+                        <div class="mt-xl py-md border-y border-outline-variant">
+                            <div class="flex justify-between items-center">
+                                <span class="font-label-sm text-label-sm text-on-surface-variant">Applied Date</span>
+                                <span class="font-label-sm text-label-sm font-bold">22/01/2018</span>
+                            </div>
+                            <div class="flex justify-between items-center mt-sm">
+                                <span class="font-label-sm text-label-sm text-on-surface-variant">Batch No.</span>
+                                <span class="font-label-sm text-label-sm font-bold">FA-9923-X</span>
+                            </div>
+                        </div>
+                        <div class="mt-md">
+                            <div class="flex items-center gap-sm text-secondary">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                <span class="font-caption text-caption">Permanently Valid</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Vaccine Card: Hepatite B -->
+                <div
+                    class="bg-surface-container-lowest rounded-xl vaccine-card-shadow border-l-4 border-tertiary overflow-hidden">
+                    <div class="p-lg">
+                        <div class="flex items-center gap-md mb-md">
+                            <div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center">
+                                <span class="material-symbols-outlined text-on-tertiary-fixed"
+                                    style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                            </div>
+                            <div>
+                                <h3 class="font-title-md text-title-md text-on-surface">Hepatite B</h3>
+                                <p class="font-caption text-caption text-on-surface-variant">3 Doses Required</p>
+                            </div>
+                        </div>
+                        <div class="mt-lg space-y-sm">
+                            <div class="flex items-center justify-between">
+                                <span class="font-caption text-caption">Dose 1: 01/2015</span>
+                                <span class="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="font-caption text-caption">Dose 2: 03/2015</span>
+                                <span class="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="font-caption text-caption">Dose 3: 07/2015</span>
+                                <span class="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+                            </div>
+                        </div>
+                        <div class="mt-xl h-1 bg-surface-container rounded-full overflow-hidden">
+                            <div class="bg-secondary h-full w-full"></div>
+                        </div>
+                        <p class="mt-xs font-caption text-caption text-on-surface-variant text-right">100% Complete</p>
+                    </div>
+                </div>
+                <!-- QR Code Spotlight Card -->
+                <div
+                    class="lg:col-span-2 bg-on-primary-fixed-variant text-on-primary-container rounded-xl vaccine-card-shadow p-lg flex flex-col md:flex-row items-center gap-xl relative overflow-hidden">
+                    <!-- Decorative pattern -->
+                    <div
+                        class="absolute right-0 top-0 w-64 h-64 bg-primary-container/20 rounded-full blur-3xl -mr-32 -mt-32">
+                    </div>
+                    <div class="flex-shrink-0 bg-white p-md rounded-xl">
+                        <img alt="Verification QR Code" class="w-32 h-32"
+                            data-alt="A clean, high-contrast QR code centered on a square white background. The image has a professional, sterile look with sharp edges and a minimalist aesthetic. Soft, diffuse lighting suggests a clinical or corporate tech environment, using a palette of deep navy blues and pristine whites to evoke trust and security."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS2sqqTnX2_pe6xyKegkm--Ac2ge9K2lBxrjciYoPAzacyJuRyRfPl7JFBEV5u9d9falXe6DFZHC2ne-ThAVC-JZrvmhfBNR57pOvwWu4APm3vpDJkouJVI4XJfkh0-UsDEXZBx0tdQZS37xt2wn2WiHfA80LYGSsouaXLdqAts5u8W0vZ_Hk3pZB_zCIgaFaVzqGc-tiLacdPLKXj1dimtfAtlDf_OfsOPG5pmf4gGbXgbccs-9WI2L4bxnD-YH8zdnadOUbMlCA" />
+                    </div>
+                    <div class="relative z-10 text-center md:text-left">
+                        <h4 class="font-title-md text-title-md mb-xs">Fast Verification QR</h4>
+                        <p class="font-body-md text-body-md opacity-90 mb-md max-w-md">Present this code at
+                            international borders or healthcare facilities to instantly verify your full vaccination
+                            history securely.</p>
+                        <div class="flex flex-wrap justify-center md:justify-start gap-md">
+                            <button
+                                class="bg-surface-container-lowest text-primary px-md py-sm rounded-lg font-label-sm text-label-sm flex items-center gap-sm">
+                                <span class="material-symbols-outlined">print</span> Print Card
+                            </button>
+                            <button
+                                class="border border-on-primary-container text-on-primary-container px-md py-sm rounded-lg font-label-sm text-label-sm flex items-center gap-sm">
+                                <span class="material-symbols-outlined">smartphone</span> Save to Phone
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Missing Vaccine Promo / Alert Section -->
+            <div
+                class="mt-xl bg-surface-container-high rounded-xl p-lg border border-outline-variant flex items-center justify-between">
+                <div class="flex items-center gap-lg">
+                    <span class="material-symbols-outlined text-tertiary text-[40px]">info</span>
+                    <div>
+                        <h4 class="font-title-md text-title-md text-on-surface">Pending Flu Shot (Gripe)</h4>
+                        <p class="font-body-md text-body-md text-on-surface-variant">The 2024 seasonal campaign is now
+                            active. Schedule your dose today.</p>
+                    </div>
+                </div>
+                <button
+                    class="bg-tertiary-container text-on-tertiary-container px-lg py-md rounded-lg font-label-sm text-label-sm hover:opacity-90">
+                    Find Nearest Clinic
+                </button>
+            </div>
+        </section>
+        <!-- Footer (Shared Component) -->
+        <footer
+            class="bg-surface-container-lowest dark:bg-surface-container-high border-t border-outline-variant dark:border-outline py-lg">
+            <div
+                class="flex flex-col md:flex-row justify-between items-center px-lg max-w-[1200px] mx-auto gap-md w-full">
+                <div class="flex flex-col items-center md:items-start">
+                    <p class="font-label-sm text-label-sm text-on-surface-variant">VaxWallet</p>
+                    <p class="font-caption text-caption text-secondary dark:text-secondary-fixed">© 2024 VaxWallet.
+                        Secure Health Data Management.</p>
+                </div>
+                <div class="flex gap-lg">
+                    <a class="font-caption text-caption text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors cursor-pointer"
+                        href="#">Privacy Policy</a>
+                    <a class="font-caption text-caption text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors cursor-pointer"
+                        href="#">Terms of Service</a>
+                    <a class="font-caption text-caption text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors cursor-pointer"
+                        href="#">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>
