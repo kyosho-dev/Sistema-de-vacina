@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @theme {
   /* Configuração das suas Cores Personalizadas */
   --color-on-tertiary-fixed-variant: #6a3b00;
@@ -70,21 +69,12 @@
   --font-title-md: "Inter", sans-serif;
   --font-headline-lg: "Inter", sans-serif;
   --font-headline-lg-mobile: "Inter", sans-serif;
-
-  --font-headline-lg--size: 32px;
-  --font-headline-lg--line-height: 40px;
-  --font-headline-lg--letter-spacing: -0.01em;
-  --font-weight-headline-lg: 600; /* Para o utilitário font-headline-lg pegar o peso */
-
-    /* Configuração das bordas */
+  
+  /* Configuração das bordas */
   --radius-default: 0.25rem;  /* Equivalente ao "DEFAULT" */
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-full: 9999px;
-
-
-
-  
 }
 
 /* Seus estilos CSS customizados tradicionais */
@@ -101,10 +91,53 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
+.text-caption {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.text-body-md {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.text-display-lg {
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.text-body-lg {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+.text-label-sm {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+
+.text-title-md {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
 .text-headline-lg {
-  font-size: var(--font-headline-lg--size);
-  line-height: var(--font-headline-lg--line-height);
-  letter-spacing: var(--font-headline-lg--letter-spacing);
-  font-weight: var(--font-weight-headline-lg);
-  font-family: var(--font-headline-lg);
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.headline-lg-mobile {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
 }

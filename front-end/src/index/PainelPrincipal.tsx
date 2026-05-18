@@ -1,29 +1,9 @@
 // src/App.tsx
-import { Layout } from './components/Layout';
+import { Layout } from '../components/Layout';
 
 function App() {
   return (
     <Layout>
-      {/* Top Navigation Bar (Mobile Header/Desktop Actions) */}
-      <header className="sticky top-0 z-30 bg-surface shadow-sm px-lg py-sm flex justify-between items-center rounded-xl mb-lg">
-        <div className="flex items-center gap-md">
-          <span className="md:hidden material-symbols-outlined text-primary" data-icon="menu">menu</span>
-          <h2 className="font-title-md text-title-md text-primary font-bold">Dashboard Overview</h2>
-        </div>
-        <div className="flex items-center gap-lg">
-          <div className="hidden md:flex items-center bg-surface-container-low px-md py-xs rounded-full border border-outline-variant">
-            <span className="material-symbols-outlined text-on-surface-variant mr-sm" data-icon="search">search</span>
-            <input className="bg-transparent border-none focus:ring-0 text-body-md w-48 outline-none" placeholder="Search records..." type="text" />
-          </div>
-          <div className="flex items-center gap-md">
-            <span className="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-xs rounded-full" data-icon="notifications">notifications</span>
-            <div className="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold text-caption">
-              JD
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Grid Content */}
       <section className="max-w-[1200px] mx-auto flex flex-col gap-lg">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-lg">
@@ -33,18 +13,18 @@ function App() {
             <div className="flex justify-between items-start">
               <div>
                 <span className="px-sm py-xs bg-secondary-container text-on-secondary-container rounded-full font-label-sm text-label-sm">Em dia</span>
-                <h3 className="font-headline-lg text-headline-lg mt-sm">Vaccination Status</h3>
+                <h3 className="font-headline-lg text-headline-lg mt-sm">Status de Vacinação</h3>
               </div>
               <div className="text-right">
                 <p className="font-display-lg text-display-lg text-secondary">90%</p>
-                <p className="font-label-sm text-label-sm text-on-surface-variant">Complete Profile</p>
+                <p className="font-label-sm text-label-sm text-on-surface-variant">Perfil completo</p>
               </div>
             </div>
             <div className="w-full bg-surface-container-highest h-3 rounded-full overflow-hidden mt-lg">
               <div className="bg-secondary h-full rounded-full" style={{ width: '90%' }}></div>
             </div>
             <p className="font-body-md text-body-md text-on-surface-variant mt-md">
-              You're protected against most clinical risks. Complete your remaining dose to reach 100%.
+              Você está protegido contra a maioria dos riscos clínicos. Conclua sua dose restante para alcançar 100%.
             </p>
           </div>
 
@@ -53,13 +33,13 @@ function App() {
             <div>
               <div className="flex items-center gap-sm opacity-90">
                 <span className="material-symbols-outlined" data-icon="event">event</span>
-                <span className="font-label-sm text-label-sm">Next Scheduled</span>
+                <span className="font-label-sm text-label-sm">Próxima Agendada</span>
               </div>
               <h3 className="font-title-md text-title-md mt-md">Influenza (Flu Shot)</h3>
               <p className="font-body-md text-body-md opacity-80">October 15, 2024</p>
             </div>
             <button className="mt-xl w-full py-sm bg-on-primary text-primary rounded-lg font-bold font-label-sm text-label-sm hover:bg-primary-fixed transition-colors">
-              View Details
+              Mostar detalhes
             </button>
           </div>
 
@@ -68,29 +48,29 @@ function App() {
             <div className="bg-surface card-shadow rounded-xl p-md flex items-center gap-md hover:bg-surface-container-low cursor-pointer transition-colors border border-outline-variant">
               <div className="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container"><span className="material-symbols-outlined" data-icon="qr_code_2">qr_code_2</span></div>
               <div>
-                <p className="font-title-md text-label-sm font-bold">View QR Code</p>
-                <p className="font-caption text-caption text-on-surface-variant">Quick verification</p>
+                <p className="font-title-md text-label-sm font-bold">Ver QR Code</p>
+                <p className="font-caption text-caption text-on-surface-variant">Verificação rapida</p>
               </div>
             </div>
             <div className="bg-surface card-shadow rounded-xl p-md flex items-center gap-md hover:bg-surface-container-low cursor-pointer transition-colors border border-outline-variant">
               <div className="w-12 h-12 rounded-lg bg-tertiary-container flex items-center justify-center text-on-tertiary-container"><span className="material-symbols-outlined" data-icon="add_task">add_task</span></div>
               <div>
-                <p className="font-title-md text-label-sm font-bold">Schedule</p>
-                <p className="font-caption text-caption text-on-surface-variant">New dose or booster</p>
+                <p className="font-title-md text-label-sm font-bold">Agendar</p>
+                <p className="font-caption text-caption text-on-surface-variant">Nova dose ou reforço</p>
               </div>
             </div>
             <div className="bg-surface card-shadow rounded-xl p-md flex items-center gap-md hover:bg-surface-container-low cursor-pointer transition-colors border border-outline-variant">
               <div className="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary"><span className="material-symbols-outlined" data-icon="download">download</span></div>
               <div>
                 <p className="font-title-md text-label-sm font-bold">Download PDF</p>
-                <p className="font-caption text-caption text-on-surface-variant">Official certificate</p>
+                <p className="font-caption text-caption text-on-surface-variant">Certificado oficial</p>
               </div>
             </div>
             <div className="bg-surface card-shadow rounded-xl p-md flex items-center gap-md hover:bg-surface-container-low cursor-pointer transition-colors border border-outline-variant">
               <div className="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary"><span className="material-symbols-outlined" data-icon="share">share</span></div>
               <div>
-                <p className="font-title-md text-label-sm font-bold">Share Record</p>
-                <p className="font-caption text-caption text-on-surface-variant">Send to physician</p>
+                <p className="font-title-md text-label-sm font-bold">Compartilhar registro</p>
+                <p className="font-caption text-caption text-on-surface-variant">Enviar ao médico</p>
               </div>
             </div>
           </div>
@@ -98,21 +78,37 @@ function App() {
           {/* Recent Activity */}
           <div className="md:col-span-7 bg-surface card-shadow rounded-xl overflow-hidden flex flex-col border border-outline-variant">
             <div className="p-lg border-b border-outline-variant flex justify-between items-center">
-              <h3 className="font-title-md text-title-md">Recent Activity</h3>
-              <button className="text-primary font-label-sm text-label-sm hover:underline">View All</button>
+              <h3 className="font-title-md text-title-md">Atividade Recente</h3>
+              <button className="text-primary font-label-sm text-label-sm hover:underline">Ver Tudo</button>
             </div>
             <div className="flex flex-col">
+              {/* Activity Item 1 */}
               <div className="p-lg flex items-center justify-between border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
                 <div className="flex items-center gap-md">
                   <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container"><span className="material-symbols-outlined" data-icon="check_circle">check_circle</span></div>
                   <div>
-                    <p className="font-body-md text-body-md font-bold">COVID-19 Booster Dose</p>
-                    <p className="font-caption text-caption text-on-surface-variant">Applied by Dr. Sarah Miller • City Clinic</p>
+                    <p className="font-body-md text-body-md font-bold">COVID-19 Dose de reforço</p>
+                    <p className="font-caption text-caption text-on-surface-variant">Aplicada por Dr. Sarah Miller • City Clinic</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="font-label-sm text-label-sm font-bold">Aug 12, 2024</p>
-                  <p className="font-caption text-caption text-secondary">Verified</p>
+                  <p className="font-caption text-caption text-secondary">Vereficado</p>
+                </div>
+              </div>
+
+              {/* Activity Item 2 */}
+              <div className="p-lg flex items-center justify-between border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
+                <div className="flex items-center gap-md">
+                  <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container"><span className="material-symbols-outlined" data-icon="check_circle">check_circle</span></div>
+                  <div>
+                    <p className="font-body-md text-body-md font-bold">Febre amarela</p>
+                    <p className="font-caption text-caption text-on-surface-variant">Certificação de Viagem Internacional</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-label-sm text-label-sm font-bold">Jan 05, 2024</p>
+                  <p className="font-caption text-caption text-secondary">Verificado</p>
                 </div>
               </div>
             </div>
@@ -122,9 +118,9 @@ function App() {
           <div className="md:col-span-5 flex flex-col gap-lg">
             <div className="bg-surface-container-high card-shadow rounded-xl p-lg relative overflow-hidden">
               <div className="relative z-10">
-                <h4 className="font-title-md text-title-md text-on-surface font-bold">Health Tip</h4>
+                <h4 className="font-title-md text-title-md text-on-surface font-bold">Dica de Saúde</h4>
                 <p className="font-body-md text-body-md text-on-surface-variant mt-sm">
-                  Keeping your digital wallet updated ensures faster check-ins at clinics.
+                  Manter sua carteira digital atualizada garante um check-in mais rápido nas clínicas..
                 </p>
               </div>
             </div>
@@ -136,7 +132,7 @@ function App() {
       {/* Footer */}
       <footer className="mt-xl border-t border-outline-variant bg-surface-container-lowest py-lg rounded-xl">
         <div className="max-w-[1200px] mx-auto px-lg flex flex-col md:flex-row justify-between items-center gap-md">
-          <p className="font-caption text-caption text-on-surface-variant">© 2026 VaxWallet. Secure Health Data Management.</p>
+          <p className="font-caption text-caption text-on-surface-variant">© 2026 VaxWallet. Gerenciamento seguro de dados de saúde.</p>
         </div>
       </footer>
     </Layout>
