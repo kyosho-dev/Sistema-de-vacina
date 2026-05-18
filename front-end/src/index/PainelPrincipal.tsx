@@ -1,10 +1,7 @@
-// src/App.tsx
-import { Layout } from '../components/Layout';
+import React from 'react';
 
-function App() {
+export function PainelPrincipal() {
   return (
-    <Layout>
-      {/* Main Grid Content */}
       <section className="max-w-[1200px] mx-auto flex flex-col gap-lg">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-lg">
           
@@ -129,14 +126,5 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="mt-xl border-t border-outline-variant bg-surface-container-lowest py-lg rounded-xl">
-        <div className="max-w-[1200px] mx-auto px-lg flex flex-col md:flex-row justify-between items-center gap-md">
-          <p className="font-caption text-caption text-on-surface-variant">© 2026 VaxWallet. Gerenciamento seguro de dados de saúde.</p>
-        </div>
-      </footer>
-    </Layout>
   );
 }
-
-export default App;
