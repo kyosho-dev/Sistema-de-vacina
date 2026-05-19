@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 
 import { PainelPrincipal } from './index/PainelPrincipal';
-import { Historico } from './index/Historico';
+import { Historico } from './index/Historico/Historico';
 import { Alertas } from './index/Alertas';
 import { Perfil } from './index/Perfil';
 import { BuscarVacinas } from './index/BuscarVacinas';

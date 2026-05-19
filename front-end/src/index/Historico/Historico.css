@@ -1,0 +1,203 @@
+.searchBar-card {
+  background-color: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: 1rem;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  align-items: center;
+  box-shadow: var(--card-shadow);
+}
+
+.searchBar-input-wrapper {
+  flex-grow: 1;
+  min-width: 240px;
+}
+
+.searchBar-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.searchBar-icon {
+  user-select: none;
+  color: black;
+  font-size: 1.5rem;
+}
+
+.searchBar-input {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 0.5rem;
+  border: 1px solid var(--outline-variant);
+  background-color: var(--surface);
+  outline: none;
+}
+
+.searchBar-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.searchBar-select-group {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.searchBar-select {
+  border: 1px solid var(--outline-variant);
+  border-radius: 0.5rem;
+  background-color: var(--surface);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--label-sm);
+  outline: none;
+}
+
+.searchBar-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.searchBar-clear {
+  color: black;
+  font-size: var(--label-sm);
+  padding: 0 var(--spacing-md);
+  transition: all 0.2s ease;
+}
+
+.searchBar-clear:hover {
+  text-decoration: underline;
+}
+
+/* VaccineCard */
+
+.VaccineCards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: #f9f9f9;
+  border-left: 4px solid #007bff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.card-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  color: #fff;
+  font-variation-settings: "FILL" 1;
+  user-select: none;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.badge {
+  background: #007bff33;
+  color: #007bff;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+.last-update {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.dose-box {
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.booster {
+  background: rgba(0, 123, 255, 0.1);
+  border: 109px solid rgba(0, 123, 255, 0.3);
+}
+
+.dose-label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.booster-label {
+  color: #007bff;
+}
+
+.dose-date {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.dose-status {
+  font-size: 0.8rem;
+  color: #28a745;
+}
+
+.card-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #007bff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.action-btn:hover {
+  background: rgba(0, 123, 255, 0.05);
+}
