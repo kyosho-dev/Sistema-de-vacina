@@ -1,11 +1,32 @@
+import { useState } from "react";
 import { userVaccines } from "../../../Database/userVaccines";
-import "./Historico.css";
-import "./VacineCard";
+import { vaccines } from "../../../Database/vaccines";
 import VaccineCard from "./VacineCard";
 
-
 export function SearchBar() {
-    const current_userID = 1
+  const current_userID = 1;
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredVaccines = userVaccines.filter((userVaccine) => {
+    if (userVaccine.userId !== current_userID) return false;
+
+    const vaccineInfo = vaccines.find((v) => v.id === userVaccine.vaccineId);
+
+    if (!vaccineInfo) return false;
+
+    return vaccineInfo.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+
+  const uniqueVaccines = filteredVaccines.filter(
+    (vaccine, index, self) =>
+      index ===
+      self.findIndex(
+        (v) => v.vaccineId === vaccine.vaccineId && v.userId === vaccine.userId,
+      ),
+  );
+
   return (
     <>
       <div className="searchBar-card">
@@ -14,41 +35,26 @@ export function SearchBar() {
             <span className="searchBar-icon material-symbols-outlined">
               filter_list
             </span>
+
             <input
               className="searchBar-input"
-              placeholder="Pesquisar"
+              placeholder="Pesquisar vacina"
               type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </div>
-        <div className="searchBar-select-group">
-          <select className="searchBar-select">
-            <option>All Years</option>
-            <option>2024</option>
-            <option>2023</option>
-            <option>2022</option>
-            <option>Prior</option>
-          </select>
-          <select className="searchBar-select">
-            <option>All Types</option>
-            <option>Viral</option>
-            <option>Bacterial</option>
-            <option>mRNA</option>
-          </select>
-        </div>
-        <button className="searchBar-clear">Clear Filters</button>
       </div>
 
       <div className="VaccineCards">
-        {userVaccines
-          .filter((vaccine) => vaccine.userId === current_userID)
-          .map((vaccine) => (
-            <VaccineCard
-              key={vaccine.vaccineId}
-              user_id={vaccine.userId}
-              vaccine_id={vaccine.vaccineId}
-            />
-          ))}
+        {uniqueVaccines.map((vaccine) => (
+          <VaccineCard
+            key={`${vaccine.userId}-${vaccine.vaccineId}`}
+            user_id={vaccine.userId}
+            vaccine_id={vaccine.vaccineId}
+          />
+        ))}
       </div>
     </>
   );
