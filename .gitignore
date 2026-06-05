@@ -1,2 +1,8 @@
 nome_da_pasta/
 config/
+node_modules/
+node_modules/.package-lock.json
+package-lock.json
+package.json
+front-end/package-lock.json
+front-end/package.json

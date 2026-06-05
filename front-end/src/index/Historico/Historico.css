@@ -1,5 +1,5 @@
 .searchBar-card {
-  background-color: var(--surface-container-lowest);
+  background-color: rgb(255, 255, 255);
   border: 1px solid var(--outline-variant);
   border-radius: 1rem;
   padding: var(--spacing-md);
@@ -8,7 +8,7 @@
   flex-wrap: wrap;
   gap: var(--spacing-md);
   align-items: center;
-  box-shadow: var(--card-shadow);
+  box-shadow: 0px 0px 5px 1px rgba(128, 128, 128, 0.3);
 }
 
 .searchBar-input-wrapper {
@@ -34,12 +34,14 @@
   border-radius: 0.5rem;
   border: 1px solid var(--outline-variant);
   background-color: var(--surface);
+
   outline: none;
 }
 
 .searchBar-input:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 1px var(--primary);
+  box-shadow: 0px 0px 5px 1px rgba(128, 128, 128, 0.3);
 }
 
 .searchBar-select-group {
@@ -80,6 +82,15 @@
   gap: 20px;
 }
 
+.card-unique {
+  background: #f9f9f9;
+  border-left: 4px solid #15ff00;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
 .card {
   background: #f9f9f9;
   border-left: 4px solid #007bff;
@@ -106,6 +117,16 @@
   gap: 12px;
 }
 
+.icon-circle-unique {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #15ff00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .icon-circle {
   width: 48px;
   height: 48px;
@@ -114,6 +135,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.icon-unique {
+  color: #10574d;
+  font-variation-settings: "FILL" 1;
+  user-select: none;
 }
 
 .icon {
@@ -125,6 +152,14 @@
 .card-title {
   font-size: 1.25rem;
   color: #333;
+}
+
+.badge-unique {
+  background: #00ff1533;
+  color: #10574d;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
 }
 
 .badge {
@@ -179,10 +214,18 @@
   color: #28a745;
 }
 
+.card-actions-unique {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  color: #0d7c52;
+}
+
 .card-actions {
   margin-top: 20px;
   display: flex;
   gap: 12px;
+  color: #007bff;
 }
 
 .action-btn {
@@ -190,7 +233,6 @@
   align-items: center;
   gap: 6px;
   font-size: 0.9rem;
-  color: #007bff;
   padding: 6px 10px;
   border-radius: 6px;
   background: transparent;
