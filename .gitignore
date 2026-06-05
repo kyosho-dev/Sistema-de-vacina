@@ -6,3 +6,4 @@ package-lock.json
 package.json
 front-end/package-lock.json
 front-end/package.json
+npm install
