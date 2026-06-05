@@ -1,11 +1,15 @@
 import React from "react";
 import ProgressBar from "./ProgressBar";
 
+
+
+
 export function PainelPrincipal() {
+  const progress = 72;
   return (
     <section className="max-w-[1200px] mx-auto flex flex-col gap-lg">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-lg">
-        <ProgressBar progress={30}/>
+        <ProgressBar progress={progress} />
 
         {/* Next Scheduled Card */}
         <div className="md:col-span-4 bg-primary text-on-primary card-shadow rounded-xl p-lg flex flex-col justify-between">
