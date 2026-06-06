@@ -1,11 +1,36 @@
 import React from "react";
 import ProgressBar from "./ProgressBar";
-
+import { useMemo } from 'react';
+import { calcularStatusVacinas } from "../../../Database/vaccinesTakenAndNeeded";
 
 
 
 export function PainelPrincipal() {
-  const progress = 72;
+  //Usando de exemplo o usuário de id 1
+  const idUsuarioLogado = 2;
+
+  //Busca a lista com o status de todas as vacinas obrigatórias do usuário
+  const listaVacinasUsuario = useMemo (() => {
+    return calcularStatusVacinas(idUsuarioLogado);
+  }, [idUsuarioLogado]);
+
+  //Aqui fazemos a média: somamos todas as porcentagens e dividimos pelo total de vacinas
+  const progress = useMemo(() => {
+    //Se o usuário não precisar de nenhuma vacina, de acordo com a sua idade, o progresso dele é 100%
+    if (listaVacinasUsuario.length === 0) return 100;
+
+    //Soma a porcentagem de cada vacina da lista
+    const somaPorcentagens = listaVacinasUsuario.reduce((acumulador, vacina) => {
+      return acumulador + vacina.porcentagem;
+    }, 0)
+
+    //Arredonda o número da porcentagem para um número inteiro
+    return Math.round(somaPorcentagens / listaVacinasUsuario.length);
+
+    //Divide a soma pelo número de vacinas para ter o progresso geral da carteira
+    return somaPorcentagens / listaVacinasUsuario.length;
+  }, [listaVacinasUsuario]);
+
   return (
     <section className="max-w-[1200px] mx-auto flex flex-col gap-lg">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-lg">
@@ -19,7 +44,7 @@ export function PainelPrincipal() {
                 event
               </span>
               <span className="font-label-sm text-label-sm">
-                Próxima Agendada
+                Próximo Agendamento
               </span>
             </div>
             <h3 className="font-title-md text-title-md mt-md">
@@ -30,7 +55,7 @@ export function PainelPrincipal() {
             </p>
           </div>
           <button className="mt-xl w-full py-sm bg-on-primary text-primary rounded-lg font-bold font-label-sm text-label-sm hover:bg-primary-fixed transition-colors">
-            Mostar detalhes
+            Mostrar detalhes
           </button>
         </div>
 
@@ -121,7 +146,7 @@ export function PainelPrincipal() {
                     COVID-19 Dose de reforço
                   </p>
                   <p className="font-caption text-caption text-on-surface-variant">
-                    Aplicada por Dr. Sarah Miller • City Clinic
+                    Aplicada por Enfermeira Fernanda Silva • Centro de Saúde Maria Goretti/Ipê
                   </p>
                 </div>
               </div>
@@ -130,7 +155,7 @@ export function PainelPrincipal() {
                   Aug 12, 2024
                 </p>
                 <p className="font-caption text-caption text-secondary">
-                  Vereficado
+                  Verificado
                 </p>
               </div>
             </div>
@@ -172,11 +197,11 @@ export function PainelPrincipal() {
           <div className="bg-surface-container-high card-shadow rounded-xl p-lg relative overflow-hidden">
             <div className="relative z-10">
               <h4 className="font-title-md text-title-md text-on-surface font-bold">
-                Dica de Saúde
+                Dicas de Saúde
               </h4>
               <p className="font-body-md text-body-md text-on-surface-variant mt-sm">
-                Manter sua carteira digital atualizada garante um check-in mais
-                rápido nas clínicas..
+                Manter sua carteira de vacinação sempre atualizada garante um check-in mais
+                rápido nas clínicas e ter suas vacinas sempre em dia permite que tenha menos problemas ao fazer uma viagem internacional!
               </p>
             </div>
           </div>
