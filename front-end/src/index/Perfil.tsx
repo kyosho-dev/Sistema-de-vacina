@@ -1,10 +1,10 @@
-// src/components/AccountProfile.tsx
-import React from 'react';
+import React, { useState } from "react";
 
-export function Perfil() {
+export default function AccountProfile() {
+  const [dateOfBirth] = useState("1982-10-24");
+
   return (
     <div className="max-w-[1200px] mx-auto p-lg w-full">
-      
       {/* Breadcrumbs / Page Header */}
       <div className="mb-xl">
         <h1 className="text-headline-lg text-on-surface">Account Profile</h1>
@@ -15,10 +15,8 @@ export function Perfil() {
 
       {/* Bento Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg">
-        
         {/* Personal Info Card & Dependents (L-Grid 7) */}
         <section className="lg:col-span-7 flex flex-col gap-lg">
-          
           {/* Personal Information */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)] border-l-4 border-primary">
             <div className="flex justify-between items-start mb-lg">
@@ -27,46 +25,76 @@ export function Perfil() {
                 <span className="material-symbols-outlined">edit</span> Edit
               </button>
             </div>
-            
-            import { useState } from "react";
 
-export default function Profile() {
-  const [dateOfBirth] = useState("1982-10-24");
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-xl">
+              <div>
+                <label className="text-label-sm text-on-surface-variant block mb-xs">
+                  Full Name
+                </label>
+                <p className="text-body-md font-semibold">Ricardo Silva</p>
+              </div>
 
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-xl">
-      <div>
-        <label className="text-label-sm text-on-surface-variant block mb-xs">
-          Full Name
-        </label>
-        <p className="text-body-md font-semibold">Ricardo Silva</p>
-      </div>
+              <div>
+                <label className="text-label-sm text-on-surface-variant block mb-xs">
+                  CPF (Tax ID)
+                </label>
+                <p className="text-body-md font-semibold">***.482.908-**</p>
+              </div>
 
-      <div>
-        <label className="text-label-sm text-on-surface-variant block mb-xs">
-          CPF (Tax ID)
-        </label>
-        <p className="text-body-md font-semibold">***.482.908-**</p>
-      </div>
+              <div>
+                <label className="text-label-sm text-on-surface-variant block mb-xs">
+                  Date of Birth
+                </label>
+                <p className="text-body-md font-semibold">
+                  {new Date(dateOfBirth).toLocaleDateString("pt-BR")}
+                </p>
+              </div>
 
-      <div>
-        <label className="text-label-sm text-on-surface-variant block mb-xs">
-          Date of Birth
-        </label>
-        <p className="text-body-md font-semibold">
-          {new Date(dateOfBirth).toLocaleDateString("pt-BR")}
-        </p>
-      </div>
+              <div>
+               <div>
+ <div>
+  <label className="text-label-sm text-on-surface-variant block mb-xs">
+    Email Address
+  </label>
 
-      <div>
-        <label className="text-label-sm text-on-surface-variant block mb-xs">
-          Email Address
-        </label>
-        <p className="text-body-md font-semibold">ricardo.silva@email.com</p>
+  {isEditingEmail ? (
+    <div className="flex flex-col gap-sm">
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="border border-outline-variant rounded-lg px-md py-sm text-body-md"
+      />
+      <div className="flex gap-sm">
+        <button
+          type="button"
+          onClick={() => setIsEditingEmail(false)}
+          className="px-md py-sm rounded-lg bg-primary text-on-primary"
+        >
+          Save
+        </button>
+        <button
+          type="button"
+          onClick={() => setIsEditingEmail(false)}
+          className="px-md py-sm rounded-lg bg-surface-container-high text-on-surface"
+        >
+          Cancel
+        </button>
       </div>
     </div>
-  );
-}
+  ) : (
+    <div className="flex items-center gap-sm">
+      <p className="text-body-md font-semibold">{email}</p>
+      <button
+        type="button"
+        onClick={() => setIsEditingEmail(true)}
+        className="text-primary text-label-sm hover:underline"
+      >
+        Edit
+      </button>
+    </div>
+  )}
+</div>
 
 
           {/* Dependents Management */}
@@ -79,13 +107,12 @@ export default function Profile() {
             </div>
 
             <div className="flex flex-col gap-md">
-              {/* Dependent 1: Enzo */}
               <div className="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-outline-variant">
                 <div className="flex items-center gap-md">
-                  <img 
-                    alt="Dependent profile" 
+                  <img
+                    alt="Dependent profile"
                     className="w-10 h-10 rounded-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7eNLYfSev4leOX-LWY8Zz_H3ERm5GFc9DrKfJFbwaeSlD0sdFXWwK0viwQ-YCzU6ajAtBtbWqPkaz7TVF1XJAnIQuCKORc1FqvepGNS-nvIcsUZ0AUUNPFVV_HrJkdLvSfsm5nvLS7yZZqu5XMZOQK1qwtS9HDiVViLvJ73i6lRciKGM9EsJnFk5q5f3zz36pghvoJfbW5hw8OUkLJbYHumEaWExYgF5utvoytmPSkOiIO7L0Ty2jri569y7itXs4HoWV9cv51lA" 
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7eNLYfSev4leOX-LWY8Zz_H3ERm5GFc9DrKfJFbwaeSlD0sdFXWwK0viwQ-YCzU6ajAtBtbWqPkaz7TVF1XJAnIQuCKORc1FqvepGNS-nvIcsUZ0AUUNPFVV_HrJkdLvSfsm5nvLS7yZZqu5XMZOQK1qwtS9HDiVViLvJ73i6lRciKGM9EsJnFk5q5f3zz36pghvoJfbW5hw8OUkLJbYHumEaWExYgF5utvoytmPSkOiIO7L0Ty2jri569y7itXs4HoWV9cv51lA"
                   />
                   <div>
                     <p className="text-body-md font-bold">Enzo Silva</p>
@@ -102,13 +129,12 @@ export default function Profile() {
                 </div>
               </div>
 
-              {/* Dependent 2: Beatriz */}
               <div className="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-outline-variant">
                 <div className="flex items-center gap-md">
-                  <img 
-                    alt="Dependent profile" 
+                  <img
+                    alt="Dependent profile"
                     className="w-10 h-10 rounded-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVv7281kvkPUUfpCrp9Cn1M_g-FmhWEipMQ8f7rmFTXFxOvG6K0gL0K7Z-A66V4biNwvUyUXhpyJfnHqCo5h7x8GA4FKip1lTAAkCKYlHKZZi1i7gnyj7BbtHpHUrRYvAc_TXDh8gy-nRndzdimaG2CDuFOLt9VYLEFhwiLqa94w7YGmYfmfUV6w_NZyaQyMoisvakLJxI5PBrVyT3LB0NzY_phdKOu0yQlPs5x1hwxq0hH69qrAScTe-ifwhKvCIoqKcAK6wF5iY" 
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVv7281kvkPUUfpCrp9Cn1M_g-FmhWEipMQ8f7rmFTXFxOvG6K0gL0K7Z-A66V4biNwvUyUXhpyJfnHqCo5h7x8GA4FKip1lTAAkCKYlHKZZi1i7gnyj7BbtHpHUrRYvAc_TXDh8gy-nRndzdimaG2CDuFOLt9VYLEFhwiLqa94w7YGmYfmfUV6w_NZyaQyMoisvakLJxI5PBrVyT3LB0NzY_phdKOu0yQlPs5x1hwxq0hH69qrAScTe-ifwhKvCIoqKcAK6wF5iY"
                   />
                   <div>
                     <p className="text-body-md font-bold">Beatriz Silva</p>
@@ -126,26 +152,25 @@ export default function Profile() {
               </div>
             </div>
           </div>
-
         </section>
 
         {/* Sidebar Content (L-Grid 5) */}
         <aside className="lg:col-span-5 flex flex-col gap-lg">
-          
           {/* Digital Health Card */}
           <div className="relative bg-gradient-to-br from-primary to-on-primary-fixed-variant rounded-xl p-xl text-on-primary shadow-[0_8px_24px_rgba(0,88,188,0.25)] overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
-            
+
             <div className="relative z-10 flex flex-col gap-lg">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-title-md mb-xs">Digital Vax Card</h3>
-                  <p className="text-caption opacity-80 uppercase tracking-widest">Global Health ID</p>
+                  <p className="text-caption opacity-80 uppercase tracking-widest">
+                    Global Health ID
+                  </p>
                 </div>
                 <span className="material-symbols-outlined text-[32px]">contactless</span>
               </div>
 
-              {/* QR Code Placeholder */}
               <div className="bg-white p-sm rounded-lg self-center shadow-lg">
                 <div className="w-32 h-32 bg-surface-container-highest flex items-center justify-center border-2 border-dashed border-outline">
                   <span className="material-symbols-outlined text-on-surface-variant text-[48px]">
@@ -170,9 +195,8 @@ export default function Profile() {
           {/* Administrative Controls */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
             <h2 className="text-title-md mb-lg">Account Settings</h2>
-            
+
             <div className="flex flex-col gap-sm">
-              {/* Security & Login */}
               <button className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none">
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary">
                   security
@@ -181,34 +205,41 @@ export default function Profile() {
                   <p className="text-label-sm font-bold">Security & Login</p>
                   <p className="text-caption text-on-surface-variant">Password, 2FA, and sessions</p>
                 </div>
-                <span className="material-symbols-outlined text-on-surface-variant">navigate_next</span>
+                <span className="material-symbols-outlined text-on-surface-variant">
+                  navigate_next
+                </span>
               </button>
 
-              {/* Notification Prefs */}
               <button className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none">
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary">
                   notifications_paused
                 </span>
                 <div className="flex-grow">
                   <p className="text-label-sm font-bold">Notification Prefs</p>
-                  <p className="text-caption text-on-surface-variant">Alerts and reminders frequency</p>
+                  <p className="text-caption text-on-surface-variant">
+                    Alerts and reminders frequency
+                  </p>
                 </div>
-                <span className="material-symbols-outlined text-on-surface-variant">navigate_next</span>
+                <span className="material-symbols-outlined text-on-surface-variant">
+                  navigate_next
+                </span>
               </button>
 
-              {/* Privacy & Data */}
               <button className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none">
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary">
                   folder_shared
                 </span>
                 <div className="flex-grow">
                   <p className="text-label-sm font-bold">Privacy & Data</p>
-                  <p className="text-caption text-on-surface-variant">Control who sees your health info</p>
+                  <p className="text-caption text-on-surface-variant">
+                    Control who sees your health info
+                  </p>
                 </div>
-                <span className="material-symbols-outlined text-on-surface-variant">navigate_next</span>
+                <span className="material-symbols-outlined text-on-surface-variant">
+                  navigate_next
+                </span>
               </button>
 
-              {/* Sign Out Action */}
               <div className="pt-md mt-md border-t border-outline-variant">
                 <button className="flex items-center gap-md p-md w-full text-left text-error hover:bg-error-container/20 transition-colors rounded-lg group outline-none">
                   <span className="material-symbols-outlined">logout</span>
@@ -217,10 +248,8 @@ export default function Profile() {
               </div>
             </div>
           </div>
-
         </aside>
       </div>
-
     </div>
   );
 }
