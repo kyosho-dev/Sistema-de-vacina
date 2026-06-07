@@ -28,25 +28,46 @@ export function Perfil() {
               </button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-xl">
-              <div>
-                <label className="text-label-sm text-on-surface-variant block mb-xs">Full Name</label>
-                <p className="text-body-md font-semibold">Ricardo Silva</p>
-              </div>
-              <div>
-                <label className="text-label-sm text-on-surface-variant block mb-xs">CPF (Tax ID)</label>
-                <p className="text-body-md font-semibold">***.482.908-**</p>
-              </div>
-              <div>
-                <label className="text-label-sm text-on-surface-variant block mb-xs">Date of Birth</label>
-                <p className="text-body-md font-semibold">October 24, 1982</p>
-              </div>
-              <div>
-                <label className="text-label-sm text-on-surface-variant block mb-xs">Email Address</label>
-                <p className="text-body-md font-semibold">ricardo.silva@email.com</p>
-              </div>
-            </div>
-          </div>
+            import { useState } from "react";
+
+export default function Profile() {
+  const [dateOfBirth] = useState("1982-10-24");
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-xl">
+      <div>
+        <label className="text-label-sm text-on-surface-variant block mb-xs">
+          Full Name
+        </label>
+        <p className="text-body-md font-semibold">Ricardo Silva</p>
+      </div>
+
+      <div>
+        <label className="text-label-sm text-on-surface-variant block mb-xs">
+          CPF (Tax ID)
+        </label>
+        <p className="text-body-md font-semibold">***.482.908-**</p>
+      </div>
+
+      <div>
+        <label className="text-label-sm text-on-surface-variant block mb-xs">
+          Date of Birth
+        </label>
+        <p className="text-body-md font-semibold">
+          {new Date(dateOfBirth).toLocaleDateString("pt-BR")}
+        </p>
+      </div>
+
+      <div>
+        <label className="text-label-sm text-on-surface-variant block mb-xs">
+          Email Address
+        </label>
+        <p className="text-body-md font-semibold">ricardo.silva@email.com</p>
+      </div>
+    </div>
+  );
+}
+
 
           {/* Dependents Management */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
