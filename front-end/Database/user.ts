@@ -21,6 +21,6 @@ export const user: User[] = [  {
     id: 3,
     name: "Maria Anti-vacina",
     ageMonths: 1188,
-    birthDate: "24/01/1926
+    birthDate: "24/01/1926"
   },
 ];
