@@ -3,8 +3,14 @@ import { userVaccines } from "../../../Database/userVaccines";
 import { vaccines } from "../../../Database/vaccines";
 import VaccineCard from "./VacineCard";
 
-export function SearchBar() {
-  const current_userID = 1;
+interface SearchBarProps {
+  user_id: number;
+}
+
+
+
+export function SearchBar({ user_id }: SearchBarProps) {
+  const current_userID = user_id;
 
   const [searchTerm, setSearchTerm] = useState("");
 

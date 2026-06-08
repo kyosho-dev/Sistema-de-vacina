@@ -2,12 +2,16 @@ import React from "react";
 import ProgressBar from "./ProgressBar";
 import { useMemo } from 'react';
 import { calcularStatusVacinas } from "../../../Database/vaccinesTakenAndNeeded";
+import { AtividadeRecente } from "./AtividadeRecente/AtividadeRecente";
+
+interface PainelPrincipalProps {
+  user_id: number;
+}
 
 
+export function PainelPrincipal({ user_id }: PainelPrincipalProps) {
 
-export function PainelPrincipal() {
-
-  const idUsuarioLogado = 2;
+  const idUsuarioLogado = user_id;
 
   //Busca a lista com o status de todas as vacinas obrigatórias do usuário
   const listaVacinasUsuario = useMemo (() => {
@@ -120,77 +124,7 @@ export function PainelPrincipal() {
             </div>
           </div>
         </div>
-
-        {/* Recent Activity */}
-        <div className="md:col-span-7 bg-surface card-shadow rounded-xl overflow-hidden flex flex-col border border-outline-variant">
-          <div className="p-lg border-b border-outline-variant flex justify-between items-center">
-            <h3 className="font-title-md text-title-md">Atividade Recente</h3>
-            <button className="text-primary font-label-sm text-label-sm hover:underline">
-              Ver Tudo
-            </button>
-          </div>
-          <div className="flex flex-col">
-            {/* Activity Item 1 */}
-            <div className="p-lg flex items-center justify-between border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
-              <div className="flex items-center gap-md">
-                <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
-                  <span
-                    className="material-symbols-outlined"
-                    data-icon="check_circle"
-                  >
-                    check_circle
-                  </span>
-                </div>
-                <div>
-                  <p className="font-body-md text-body-md font-bold">
-                    COVID-19 Dose de reforço
-                  </p>
-                  <p className="font-caption text-caption text-on-surface-variant">
-                    Aplicada por Enfermeira Fernanda Silva • Centro de Saúde Maria Goretti/Ipê
-                  </p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="font-label-sm text-label-sm font-bold">
-                  12 de Maio 2026
-                </p>
-                <p className="font-caption text-caption text-secondary">
-                  Verificado
-                </p>
-              </div>
-            </div>
-
-            {/* Activity Item 2 */}
-            <div className="p-lg flex items-center justify-between border-b border-outline-variant hover:bg-surface-container-lowest transition-colors">
-              <div className="flex items-center gap-md">
-                <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
-                  <span
-                    className="material-symbols-outlined"
-                    data-icon="check_circle"
-                  >
-                    check_circle
-                  </span>
-                </div>
-                <div>
-                  <p className="font-body-md text-body-md font-bold">
-                    Febre amarela
-                  </p>
-                  <p className="font-caption text-caption text-on-surface-variant">
-                    Aplicada por Enfermeira Marta Peixoto • Centro de Saúde Barreiro de Cima
-                  </p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="font-label-sm text-label-sm font-bold">
-                  05 de Janeiro 2026
-                </p>
-                <p className="font-caption text-caption text-secondary">
-                  Verificado
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <AtividadeRecente idUser={idUsuarioLogado}/>
 
         {/* Clinical Reminders */}
         <div className="md:col-span-5 flex flex-col gap-lg">
