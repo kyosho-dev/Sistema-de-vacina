@@ -14,10 +14,10 @@ export function Alertas() {
             >
               warning
             </span>
-            Action Required
+            Avisos
           </h3>
           <span className="bg-error-container text-on-error-container px-md py-xs rounded-full text-caption font-bold">
-            2 Urgent
+            2 Urgentes
           </span>
         </div>
 
@@ -26,21 +26,20 @@ export function Alertas() {
           <div className="flex-grow">
             <div className="flex items-center gap-sm mb-xs">
               <span className="bg-error/10 text-error px-sm py-1 rounded text-caption font-bold uppercase tracking-wider">
-                Overdue
+                Vencido
               </span>
-              <h4 className="text-title-md text-on-surface">Tetanus Booster</h4>
+              <h4 className="text-title-md text-on-surface">Reforço Anti-Tétano</h4>
             </div>
             <p className="text-body-md text-on-surface-variant">
-              Your last tetanus vaccination was 11 years ago. A booster is
-              recommended every 10 years to maintain immunity.
+              Sua última vacina Anti-Tétano foi a 11 anos atrás. Uma nova dose é recomendada a cada 10 anos para manter sua imunidade.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-md w-full md:w-auto">
             <button className="bg-primary text-on-primary text-label-sm px-lg py-md rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap">
-              Schedule Now
+              Agendar agora
             </button>
             <button className="bg-primary-fixed text-on-primary-fixed-variant text-label-sm px-lg py-md rounded-lg hover:bg-primary-fixed-dim transition-colors whitespace-nowrap">
-              View Locations
+              Ver locais
             </button>
           </div>
         </div>
@@ -50,25 +49,27 @@ export function Alertas() {
           <div className="flex-grow">
             <div className="flex items-center gap-sm mb-xs">
               <span className="bg-tertiary-container/10 text-tertiary px-sm py-1 rounded text-caption font-bold uppercase tracking-wider">
-                Upcoming
+                A vencer
               </span>
               <h4 className="text-title-md text-on-surface">Dengue (Dose 2)</h4>
             </div>
             <p className="text-body-md text-on-surface-variant">
-              Your second dose window opens in 5 days. Completing the full
-              series is crucial for maximum protection.
+              Sua segunda dose deve ser tomada em até 5 dias. Deixar sua carteira sempre completa garante uma maior imunidade.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-md w-full md:w-auto">
             <button className="bg-primary text-on-primary text-label-sm px-lg py-md rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap">
-              Schedule Now
+              Agendar agora
+            </button>
+            <button className="bg-primary-fixed text-on-primary-fixed-variant text-label-sm px-lg py-md rounded-lg hover:bg-primary-fixed-dim transition-colors whitespace-nowrap">
+              Ver locais
             </button>
           </div>
         </div>
 
         {/* Notification History */}
         <div className="mt-xl">
-          <h3 className="text-title-md mb-md">Recent History</h3>
+          <h3 className="text-title-md mb-md">Histórico Recente</h3>
           <div className="bg-surface-container-lowest rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)] overflow-hidden">
             <div className="divide-y divide-outline-variant">
               {/* History Item 1 */}
@@ -81,15 +82,14 @@ export function Alertas() {
                 <div className="flex-grow">
                   <div className="flex justify-between items-start">
                     <p className="text-label-sm text-on-surface">
-                      Vaccination Record Verified
+                      Vacinação verificada
                     </p>
                     <span className="text-caption text-on-surface-variant">
-                      2h ago
+                      1 dia atrás
                     </span>
                   </div>
                   <p className="text-body-md text-on-surface-variant">
-                    Your Influenza (Flu) shot record from City Clinic has been
-                    successfully synced.
+                    Sua vacinação para Influenza no Centro de Saúde Maria Goretti/Ipê foi atualizada com sucesso.
                   </p>
                 </div>
               </div>
@@ -104,15 +104,14 @@ export function Alertas() {
                 <div className="flex-grow">
                   <div className="flex justify-between items-start">
                     <p className="text-label-sm text-on-surface">
-                      New Travel Guidelines
+                      Informações para viajantes
                     </p>
                     <span className="text-caption text-on-surface-variant">
-                      Yesterday
+                      4 dias atrás
                     </span>
                   </div>
                   <p className="text-body-md text-on-surface-variant">
-                    Updated Yellow Fever requirements for travelers visiting
-                    South America.
+                    Os requisitos da vacinação contra Febre Amarela para visitantes na América do Sul foram atualizados.
                   </p>
                 </div>
               </div>
@@ -127,20 +126,20 @@ export function Alertas() {
                 <div className="flex-grow">
                   <div className="flex justify-between items-start">
                     <p className="text-label-sm text-on-surface">
-                      Security Alert: New Device Login
+                      Alerta de segurança: Novo dispositivo conectado
                     </p>
                     <span className="text-caption text-on-surface-variant">
-                      Oct 24
+                      28 de Maio
                     </span>
                   </div>
                   <p className="text-body-md text-on-surface-variant">
-                    A new login was detected on a MacBook Pro in New York, NY.
+                    Novo login detectado em MacBook Pro em Belo Horizonte, BH.
                   </p>
                 </div>
               </div>
             </div>
             <button className="w-full py-md text-primary text-label-sm hover:bg-surface-container-low transition-colors border-t border-outline-variant outline-none">
-              View All Notifications
+              Ver todas as notificações
             </button>
           </div>
         </div>
@@ -153,12 +152,10 @@ export function Alertas() {
           <div className="relative z-10">
             <h3 className="text-title-md mb-md flex items-center gap-sm">
               <span className="material-symbols-outlined">lightbulb</span>
-              Health Tip of the Day
+              Dica de Saúde do Dia
             </h3>
             <p className="text-body-md opacity-90 mb-lg">
-              Staying hydrated after a vaccination helps reduce mild side
-              effects like headaches and fatigue. Aim for 8 glasses of water
-              today!
+              Ficar hidratado depois de tomar uma vacina ajuda a reduzir efeitos colaterais como dores de cabeça e fadiga. Tente tomar 8 copos de água no dia que tomar uma vacina!
             </p>
             <img
               alt="Fresh vegetables and water"
@@ -169,7 +166,7 @@ export function Alertas() {
               className="text-on-primary-container underline text-label-sm"
               href="#"
             >
-              Read more wellness tips
+              Leia mais sobre dicas saudáveis
             </a>
           </div>
           {/* Abstract background pattern */}
@@ -185,11 +182,11 @@ export function Alertas() {
 
         {/* Vaccination Progress Card */}
         <div className="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
-          <h3 className="text-title-md mb-md">Your Immunity Score</h3>
+          <h3 className="text-title-md mb-md">Seu progresso de imunização</h3>
           <div className="flex items-end gap-md mb-sm">
             <span className="text-4xl font-bold text-secondary">84%</span>
             <span className="text-caption text-on-surface-variant pb-1">
-              Excellent Coverage
+              Ótima cobertura
             </span>
           </div>
           <div className="w-full bg-surface-container-highest h-2 rounded-full mb-lg overflow-hidden">
@@ -198,7 +195,7 @@ export function Alertas() {
           <div className="space-y-md">
             <div className="flex items-center justify-between">
               <span className="text-label-sm text-on-surface-variant">
-                Core Vaccines
+                Vacinas essenciais
               </span>
               <span
                 className="material-symbols-outlined text-secondary"
@@ -209,7 +206,7 @@ export function Alertas() {
             </div>
             <div className="flex items-center justify-between">
               <span className="text-label-sm text-on-surface-variant">
-                Seasonal Boosters
+                Doses sazonais
               </span>
               <span className="material-symbols-outlined text-tertiary">
                 pending
@@ -220,7 +217,7 @@ export function Alertas() {
 
         {/* Location Quick Link */}
         <div className="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_12px_rgba(0,0,0,0.06)] border border-outline-variant">
-          <h3 className="text-title-md mb-md">Nearby Clinics</h3>
+          <h3 className="text-title-md mb-md">Centros de Saúde proximos a você</h3>
           <div className="relative h-40 rounded-lg overflow-hidden mb-md border border-outline-variant">
             <img
               alt="Map of clinic locations"
@@ -229,12 +226,12 @@ export function Alertas() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-md">
               <p className="text-white text-caption font-bold">
-                3 Centers within 5 miles
+                3 Centros dentro de 5km
               </p>
             </div>
           </div>
           <button className="w-full border-2 border-primary text-primary text-label-sm py-md rounded-lg hover:bg-primary/5 transition-colors outline-none">
-            Find a Clinic
+            Encontre um Posto
           </button>
         </div>
       </aside>

@@ -6,7 +6,7 @@ import { calcularStatusVacinas } from "../../../Database/vaccinesTakenAndNeeded"
 
 
 export function PainelPrincipal() {
-  //Usando de exemplo o usuário de id 1
+
   const idUsuarioLogado = 2;
 
   //Busca a lista com o status de todas as vacinas obrigatórias do usuário
@@ -48,10 +48,10 @@ export function PainelPrincipal() {
               </span>
             </div>
             <h3 className="font-title-md text-title-md mt-md">
-              Influenza (Flu Shot)
+              Influenza
             </h3>
             <p className="font-body-md text-body-md opacity-80">
-              October 15, 2024
+              15 de Outubro 2026
             </p>
           </div>
           <button className="mt-xl w-full py-sm bg-on-primary text-primary rounded-lg font-bold font-label-sm text-label-sm hover:bg-primary-fixed transition-colors">
@@ -152,7 +152,7 @@ export function PainelPrincipal() {
               </div>
               <div className="text-right">
                 <p className="font-label-sm text-label-sm font-bold">
-                  Aug 12, 2024
+                  12 de Maio 2026
                 </p>
                 <p className="font-caption text-caption text-secondary">
                   Verificado
@@ -176,13 +176,13 @@ export function PainelPrincipal() {
                     Febre amarela
                   </p>
                   <p className="font-caption text-caption text-on-surface-variant">
-                    Certificação de Viagem Internacional
+                    Aplicada por Enfermeira Marta Peixoto • Centro de Saúde Barreiro de Cima
                   </p>
                 </div>
               </div>
               <div className="text-right">
                 <p className="font-label-sm text-label-sm font-bold">
-                  Jan 05, 2024
+                  05 de Janeiro 2026
                 </p>
                 <p className="font-caption text-caption text-secondary">
                   Verificado

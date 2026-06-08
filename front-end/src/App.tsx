@@ -24,7 +24,7 @@ function App() {
       {/* Footer fixa abaixo da troca de páginas */}
       <footer className="mt-xl border-t border-outline-variant bg-surface-container-lowest py-lg rounded-xl">
         <div className="max-w-[1200px] mx-auto px-lg flex flex-col md:flex-row justify-between items-center gap-md">
-          <p className="text-caption text-on-surface-variant">© 2026 VaxWallet. Secure Health Data Management.</p>
+          <p className="text-caption text-on-surface-variant">© 2026 Carteira de Vacinação Digital. Secure Health Data Management.</p>
         </div>
       </footer>
     </Layout>

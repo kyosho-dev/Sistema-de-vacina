@@ -14,11 +14,13 @@
     "cors": "^2.8.6",
     "d3-scale": "^4.0.2",
     "express": "^5.2.1",
+    "lodash-es": "^4.18.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.22.3",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.15.1",
+    "recharts": "^3.8.1",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^1.0.0"
   },
