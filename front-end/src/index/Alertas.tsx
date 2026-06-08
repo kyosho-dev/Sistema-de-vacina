@@ -1,7 +1,14 @@
 // src/components/AlertsContent.tsx
 import React from "react";
+import ProgressMini from "./Alertas/ProgressoMini";
+import DicasDeSaude from "./Alertas/DicasDeSaude";
 
-export function Alertas() {
+interface AlertasPros {
+  user_id: number;
+}
+
+export function Alertas({ user_id }: AlertasPros) {
+  const current_id = user_id;
   return (
     <div className="grid grid-cols-1 grid-cols-12 gap-lg max-w-[1200px] mx-auto w-full p-lg">
       {/* Content Area (Left/Main Column) */}
@@ -28,10 +35,13 @@ export function Alertas() {
               <span className="bg-error/10 text-error px-sm py-1 rounded text-caption font-bold uppercase tracking-wider">
                 Vencido
               </span>
-              <h4 className="text-title-md text-on-surface">Reforço Anti-Tétano</h4>
+              <h4 className="text-title-md text-on-surface">
+                Reforço Anti-Tétano
+              </h4>
             </div>
             <p className="text-body-md text-on-surface-variant">
-              Sua última vacina Anti-Tétano foi a 11 anos atrás. Uma nova dose é recomendada a cada 10 anos para manter sua imunidade.
+              Sua última vacina Anti-Tétano foi a 11 anos atrás. Uma nova dose é
+              recomendada a cada 10 anos para manter sua imunidade.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-md w-full md:w-auto">
@@ -54,7 +64,8 @@ export function Alertas() {
               <h4 className="text-title-md text-on-surface">Dengue (Dose 2)</h4>
             </div>
             <p className="text-body-md text-on-surface-variant">
-              Sua segunda dose deve ser tomada em até 5 dias. Deixar sua carteira sempre completa garante uma maior imunidade.
+              Sua segunda dose deve ser tomada em até 5 dias. Deixar sua
+              carteira sempre completa garante uma maior imunidade.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-md w-full md:w-auto">
@@ -89,7 +100,8 @@ export function Alertas() {
                     </span>
                   </div>
                   <p className="text-body-md text-on-surface-variant">
-                    Sua vacinação para Influenza no Centro de Saúde Maria Goretti/Ipê foi atualizada com sucesso.
+                    Sua vacinação para Influenza no Centro de Saúde Maria
+                    Goretti/Ipê foi atualizada com sucesso.
                   </p>
                 </div>
               </div>
@@ -111,7 +123,8 @@ export function Alertas() {
                     </span>
                   </div>
                   <p className="text-body-md text-on-surface-variant">
-                    Os requisitos da vacinação contra Febre Amarela para visitantes na América do Sul foram atualizados.
+                    Os requisitos da vacinação contra Febre Amarela para
+                    visitantes na América do Sul foram atualizados.
                   </p>
                 </div>
               </div>
@@ -148,76 +161,14 @@ export function Alertas() {
       {/* Sidebar Content (Right Column) */}
       <aside className="col-span-12 lg:col-span-4 flex flex-col gap-lg">
         {/* Health Tips Card */}
-        <div className="bg-primary-container text-on-primary-container rounded-xl p-lg shadow-lg relative overflow-hidden group">
-          <div className="relative z-10">
-            <h3 className="text-title-md mb-md flex items-center gap-sm">
-              <span className="material-symbols-outlined">lightbulb</span>
-              Dica de Saúde do Dia
-            </h3>
-            <p className="text-body-md opacity-90 mb-lg">
-              Ficar hidratado depois de tomar uma vacina ajuda a reduzir efeitos colaterais como dores de cabeça e fadiga. Tente tomar 8 copos de água no dia que tomar uma vacina!
-            </p>
-            <img
-              alt="Fresh vegetables and water"
-              className="w-full h-32 object-cover rounded-lg mb-md"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEFZNUeQHjhb4NioigdFlN5mEPB3_A7XTdizQWPCLi36ApxQS-NTqtP_7jT8W1o43Lck-qC8CVmcdbHIubObNozThow2QuPKFk9JbaMMlfofWwTwFeOaZ0dOUHH1p88Ch69lQje64SYb1WwI20_PDiRpIVh5ITg26onFs0uoX46QAOf3wJ7Ob-SNPm5K089VYfp7iyxIvb6bbzROhHekiLYUH2CG1TGPhuahRfjRyWO49HH0he9D2gYmgeS0wOauba2--xI6TmUas"
-            />
-            <a
-              className="text-on-primary-container underline text-label-sm"
-              href="#"
-            >
-              Leia mais sobre dicas saudáveis
-            </a>
-          </div>
-          {/* Abstract background pattern */}
-          <div className="absolute -right-8 -bottom-8 opacity-10">
-            <span
-              className="material-symbols-outlined !text-9xl"
-              style={{ fontVariationSettings: "'wght' 700" }}
-            >
-              healing
-            </span>
-          </div>
-        </div>
+        <DicasDeSaude />
 
-        {/* Vaccination Progress Card */}
-        <div className="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
-          <h3 className="text-title-md mb-md">Seu progresso de imunização</h3>
-          <div className="flex items-end gap-md mb-sm">
-            <span className="text-4xl font-bold text-secondary">84%</span>
-            <span className="text-caption text-on-surface-variant pb-1">
-              Ótima cobertura
-            </span>
-          </div>
-          <div className="w-full bg-surface-container-highest h-2 rounded-full mb-lg overflow-hidden">
-            <div className="bg-secondary h-full" style={{ width: "84%" }}></div>
-          </div>
-          <div className="space-y-md">
-            <div className="flex items-center justify-between">
-              <span className="text-label-sm text-on-surface-variant">
-                Vacinas essenciais
-              </span>
-              <span
-                className="material-symbols-outlined text-secondary"
-                style={{ fontVariationSettings: "'FILL' 1" }}
-              >
-                check_circle
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-label-sm text-on-surface-variant">
-                Doses sazonais
-              </span>
-              <span className="material-symbols-outlined text-tertiary">
-                pending
-              </span>
-            </div>
-          </div>
-        </div>
-
+        <ProgressMini user_id={current_id} />
         {/* Location Quick Link */}
         <div className="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_12px_rgba(0,0,0,0.06)] border border-outline-variant">
-          <h3 className="text-title-md mb-md">Centros de Saúde proximos a você</h3>
+          <h3 className="text-title-md mb-md">
+            Centros de Saúde proximos a você
+          </h3>
           <div className="relative h-40 rounded-lg overflow-hidden mb-md border border-outline-variant">
             <img
               alt="Map of clinic locations"
