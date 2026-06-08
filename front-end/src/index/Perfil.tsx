@@ -2,6 +2,9 @@ import React, { useState } from "react";
 
 export default function AccountProfile() {
   const [dateOfBirth] = useState("1982-10-24");
+  // CORRIGIDO: Adicionadas as variáveis de estado para a funcionalidade de edição de e-mail
+  const [email, setEmail] = useState("ricardo.silva@example.com");
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
 
   return (
     <div className="max-w-[1200px] mx-auto p-lg w-full">
@@ -15,9 +18,12 @@ export default function AccountProfile() {
 
       {/* Bento Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+        
         {/* Personal Info Card & Dependents (L-Grid 7) */}
         <section className="lg:col-span-7 flex flex-col gap-lg">
+          
           {/* Personal Information */}
+          {/* CORRIGIDO: Removida a tag de fechamento precoce que havia aqui */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)] border-l-4 border-primary">
             <div className="flex justify-between items-start mb-lg">
               <h2 className="text-title-md">Personal Information</h2>
@@ -26,6 +32,7 @@ export default function AccountProfile() {
               </button>
             </div>
 
+            {/* CORRIGIDO: Removido o fechamento precoce para que os campos fiquem dentro do grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-xl">
               <div>
                 <label className="text-label-sm text-on-surface-variant block mb-xs">
@@ -51,51 +58,52 @@ export default function AccountProfile() {
               </div>
 
               <div>
-               <div>
- <div>
-  <label className="text-label-sm text-on-surface-variant block mb-xs">
-    Email Address
-  </label>
+                <div>
+                  <label className="text-label-sm text-on-surface-variant block mb-xs">
+                    Email Address
+                  </label>
+                </div>
 
-  {isEditingEmail ? (
-    <div className="flex flex-col gap-sm">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="border border-outline-variant rounded-lg px-md py-sm text-body-md"
-      />
-      <div className="flex gap-sm">
-        <button
-          type="button"
-          onClick={() => setIsEditingEmail(false)}
-          className="px-md py-sm rounded-lg bg-primary text-on-primary"
-        >
-          Save
-        </button>
-        <button
-          type="button"
-          onClick={() => setIsEditingEmail(false)}
-          className="px-md py-sm rounded-lg bg-surface-container-high text-on-surface"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  ) : (
-    <div className="flex items-center gap-sm">
-      <p className="text-body-md font-semibold">{email}</p>
-      <button
-        type="button"
-        onClick={() => setIsEditingEmail(true)}
-        className="text-primary text-label-sm hover:underline"
-      >
-        Edit
-      </button>
-    </div>
-  )}
-</div>
-
+                {isEditingEmail ? (
+                  <div className="flex flex-col gap-sm">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="border border-outline-variant rounded-lg px-md py-sm text-body-md"
+                    />
+                    <div className="flex gap-sm">
+                      <button
+                        type="button"
+                        onClick={() => setIsEditingEmail(false)}
+                        className="px-md py-sm rounded-lg bg-primary text-on-primary"
+                      >
+                        Save
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setIsEditingEmail(false)}
+                        className="px-md py-sm rounded-lg bg-surface-container-high text-on-surface"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-sm">
+                    <p className="text-body-md font-semibold">{email}</p>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditingEmail(true)}
+                      className="text-primary text-label-sm hover:underline"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
 
           {/* Dependents Management */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
@@ -152,6 +160,7 @@ export default function AccountProfile() {
               </div>
             </div>
           </div>
+          {/* CORRIGIDO: Removidas as tags </div> sobressalentes que quebravam o layout aqui */}
         </section>
 
         {/* Sidebar Content (L-Grid 5) */}
@@ -249,6 +258,7 @@ export default function AccountProfile() {
             </div>
           </div>
         </aside>
+        
       </div>
     </div>
   );

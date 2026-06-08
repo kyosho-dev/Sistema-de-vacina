@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
     "cors": "^2.8.6",
+    "d3-scale": "^4.0.2",
     "express": "^5.2.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.22.3",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/d3-scale": "^4.0.9",
     "@types/express": "^5.0.6",
     "@types/node": "^24.12.4",
     "@types/react": "^19.2.14",

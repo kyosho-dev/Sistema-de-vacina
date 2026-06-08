@@ -1,11 +1,11 @@
-import { user } from './user';
+import { users } from './user';
 import { vaccines } from './vaccines';
 import { userVaccines } from './userVaccines';
 
 export function calcularStatusVacinas (idUsuarioLogado: number) {
 
     //Encontra o utilizador usando o array 'user' e a propriedade 'id'
-    const usuarioEncontrado = user.find((u) => u.id === idUsuarioLogado);
+    const usuarioEncontrado = users.find((u) => u.id === idUsuarioLogado);
     
     //Se não encontrar o utilizador (undefined), a função para
     if (!usuarioEncontrado) {

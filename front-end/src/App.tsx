@@ -4,8 +4,9 @@ import { Layout } from './components/Layout';
 import { PainelPrincipal } from './index/PainelPrincipal/PainelPrincipal';
 import { Historico } from './index/Historico/Historico';
 import { Alertas } from './index/Alertas';
-import { Perfil } from './index/Perfil';
+import Perfil from './index/Perfil';
 import { BuscarVacinas } from './index/BuscarVacinas';
+import { PaginaMapaCobertura } from './index/Dashboard/Map';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/alertas" element={<Alertas />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/buscarVacinas" element={<BuscarVacinas />} />
+        <Route path="/cobertura" element={<PaginaMapaCobertura />} />
       </Routes>
 
       {/* Footer fixa abaixo da troca de páginas */}
