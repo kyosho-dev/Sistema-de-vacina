@@ -1,0 +1,16 @@
+{
+  "Dicas": [
+    {
+      "mensagem": "Ficar hidratado depois de tomar uma vacina ajuda a reduzir efeitos colaterais como dores de cabeça e fadiga. Tente tomar 8 copos de água no dia que tomar uma vacina!"
+    },
+    {
+        "mensagem": "Seu corpo trabalha para criar proteção após a vacinação. Uma boa noite de sono pode ajudar seu sistema imunológico a responder melhor."
+    },
+    {
+        "mensagem": "Se a vacina foi aplicada no braço, movimentos leves ao longo do dia podem ajudar a reduzir o desconforto e a rigidez no local da aplicação."
+    },
+    {
+        "mensagem": "Fazer refeições leves e equilibradas após a vacinação pode ajudar você a se sentir melhor e manter sua energia ao longo do dia."
+    }
+  ]
+}

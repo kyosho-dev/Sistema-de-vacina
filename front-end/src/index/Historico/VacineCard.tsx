@@ -1,5 +1,5 @@
 import { vaccines } from "../../../Database/vaccines";
-import { user } from "../../../Database/user";
+import { users } from "../../../Database/user";
 import { userVaccines } from "../../../Database/userVaccines";
 import "./Historico.css";
 
@@ -9,7 +9,7 @@ interface VaccineCardProps {
 }
 
 function VaccineCard({ vaccine_id, user_id }: VaccineCardProps) {
-  const currentUser = user.find((u) => u.id === user_id);
+  const currentUser = users.find((u) => u.id === user_id);
 
   const currentVaccine = vaccines.find(
     (vaccine) => vaccine.id === vaccine_id,

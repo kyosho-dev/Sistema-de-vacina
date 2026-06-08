@@ -5,7 +5,9 @@
     "tailwindcss": "^4.3.0"
   },
   "dependencies": {
+    "react-simple-maps": "^3.0.0",
     "reflect-metadata": "^0.2.2",
+    "topojson-client": "^3.1.0",
     "typeorm": "^1.0.0"
   }
 }

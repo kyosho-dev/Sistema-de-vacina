@@ -1,11 +1,80 @@
-// src/components/AccountProfile.tsx
-import React from 'react';
+import React, { useEffect, useState } from "react";
 
-export function Perfil() {
+export default function AccountProfile({ idUsuarioLogado }) {
+  const [profile, setProfile] = useState(null);
+  const [email, setEmail] = useState("");
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [savingEmail, setSavingEmail] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function loadProfile() {
+      try {
+        setLoading(true);
+        setError("");
+
+        if (!idUsuarioLogado) {
+          throw new Error("ID do usuário logado não informado.");
+        }
+
+        const response = await fetch(`/api/users/${idUsuarioLogado}`);
+
+        if (!response.ok) {
+          throw new Error("Não foi possível carregar o perfil.");
+        }
+
+        const data = await response.json();
+
+        setProfile(data);
+        setEmail(data.email || "");
+      } catch (err) {
+        setError(err.message || "Erro ao carregar perfil.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProfile();
+  }, [idUsuarioLogado]);
+
+  async function handleSaveEmail() {
+    try {
+      setSavingEmail(true);
+      setError("");
+
+      const response = await fetch(`/api/users/${idUsuarioLogado}/email`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Não foi possível atualizar o e-mail.");
+      }
+
+      const updated = await response.json();
+      setEmail(updated.email || email);
+      setIsEditingEmail(false);
+    } catch (err) {
+      setError(err.message || "Erro ao salvar e-mail.");
+    } finally {
+      setSavingEmail(false);
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="max-w-[1200px] mx-auto p-lg w-full">
+        <p className="text-body-md text-on-surface-variant">Carregando perfil...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-[1200px] mx-auto p-lg w-full">
-      
-      {/* Breadcrumbs / Page Header */}
       <div className="mb-xl">
         <h1 className="text-headline-lg text-on-surface">Account Profile</h1>
         <p className="text-body-md text-on-surface-variant">
@@ -13,58 +82,123 @@ export function Perfil() {
         </p>
       </div>
 
-      {/* Bento Grid Layout */}
+      {error && (
+        <div className="mb-lg rounded-lg border border-error/30 bg-error-container/20 p-md text-error">
+          {error}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg">
-        
-        {/* Personal Info Card & Dependents (L-Grid 7) */}
         <section className="lg:col-span-7 flex flex-col gap-lg">
-          
-          {/* Personal Information */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)] border-l-4 border-primary">
             <div className="flex justify-between items-start mb-lg">
               <h2 className="text-title-md">Personal Information</h2>
-              <button className="text-primary text-label-sm flex items-center gap-xs hover:underline outline-none">
+              <button
+                type="button"
+                className="text-primary text-label-sm flex items-center gap-xs hover:underline outline-none"
+              >
                 <span className="material-symbols-outlined">edit</span> Edit
               </button>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-xl">
               <div>
-                <label className="text-label-sm text-on-surface-variant block mb-xs">Full Name</label>
-                <p className="text-body-md font-semibold">Ricardo Silva</p>
+                <label className="text-label-sm text-on-surface-variant block mb-xs">
+                  Full Name
+                </label>
+                <p className="text-body-md font-semibold">
+                  {profile?.fullName || `Usuário #${idUsuarioLogado}`}
+                </p>
               </div>
+
               <div>
-                <label className="text-label-sm text-on-surface-variant block mb-xs">CPF (Tax ID)</label>
-                <p className="text-body-md font-semibold">***.482.908-**</p>
+                <label className="text-label-sm text-on-surface-variant block mb-xs">
+                  CPF (Tax ID)
+                </label>
+                <p className="text-body-md font-semibold">
+                  {profile?.cpf || "***.482.908-**"}
+                </p>
               </div>
+
               <div>
-                <label className="text-label-sm text-on-surface-variant block mb-xs">Date of Birth</label>
-                <p className="text-body-md font-semibold">October 24, 1982</p>
+                <label className="text-label-sm text-on-surface-variant block mb-xs">
+                  Date of Birth
+                </label>
+                <p className="text-body-md font-semibold">
+                  {profile?.dateOfBirth
+                    ? new Date(profile.dateOfBirth).toLocaleDateString("pt-BR")
+                    : "-"}
+                </p>
               </div>
+
               <div>
-                <label className="text-label-sm text-on-surface-variant block mb-xs">Email Address</label>
-                <p className="text-body-md font-semibold">ricardo.silva@email.com</p>
+                <label className="text-label-sm text-on-surface-variant block mb-xs">
+                  Email Address
+                </label>
+
+                {isEditingEmail ? (
+                  <div className="flex flex-col gap-sm">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="border border-outline-variant rounded-lg px-md py-sm text-body-md"
+                    />
+                    <div className="flex gap-sm">
+                      <button
+                        type="button"
+                        onClick={handleSaveEmail}
+                        disabled={savingEmail}
+                        className="px-md py-sm rounded-lg bg-primary text-on-primary disabled:opacity-60"
+                      >
+                        {savingEmail ? "Saving..." : "Save"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEmail(profile?.email || "");
+                          setIsEditingEmail(false);
+                        }}
+                        className="px-md py-sm rounded-lg bg-surface-container-high text-on-surface"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-sm">
+                    <p className="text-body-md font-semibold">{email || "-"}</p>
+                    <button
+                      type="button"
+                      onClick={() => setIsEditingEmail(true)}
+                      className="text-primary text-label-sm hover:underline"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Dependents Management */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
             <div className="flex justify-between items-center mb-lg">
               <h2 className="text-title-md">Family Dependents</h2>
-              <button className="bg-secondary-container text-on-secondary-container px-md py-sm rounded-lg text-label-sm flex items-center gap-sm hover:opacity-90 transition-opacity outline-none">
+              <button
+                type="button"
+                className="bg-secondary-container text-on-secondary-container px-md py-sm rounded-lg text-label-sm flex items-center gap-sm hover:opacity-90 transition-opacity outline-none"
+              >
                 <span className="material-symbols-outlined">person_add</span> Add Dependent
               </button>
             </div>
 
             <div className="flex flex-col gap-md">
-              {/* Dependent 1: Enzo */}
               <div className="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-outline-variant">
                 <div className="flex items-center gap-md">
-                  <img 
-                    alt="Dependent profile" 
+                  <img
+                    alt="Dependent profile"
                     className="w-10 h-10 rounded-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7eNLYfSev4leOX-LWY8Zz_H3ERm5GFc9DrKfJFbwaeSlD0sdFXWwK0viwQ-YCzU6ajAtBtbWqPkaz7TVF1XJAnIQuCKORc1FqvepGNS-nvIcsUZ0AUUNPFVV_HrJkdLvSfsm5nvLS7yZZqu5XMZOQK1qwtS9HDiVViLvJ73i6lRciKGM9EsJnFk5q5f3zz36pghvoJfbW5hw8OUkLJbYHumEaWExYgF5utvoytmPSkOiIO7L0Ty2jri569y7itXs4HoWV9cv51lA" 
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7eNLYfSev4leOX-LWY8Zz_H3ERm5GFc9DrKfJFbwaeSlD0sdFXWwK0viwQ-YCzU6ajAtBtbWqPkaz7TVF1XJAnIQuCKORc1FqvepGNS-nvIcsUZ0AUUNPFVV_HrJkdLvSfsm5nvLS7yZZqu5XMZOQK1qwtS9HDiVViLvJ73i6lRciKGM9EsJnFk5q5f3zz36pghvoJfbW5hw8OUkLJbYHumEaWExYgF5utvoytmPSkOiIO7L0Ty2jri569y7itXs4HoWV9cv51lA"
                   />
                   <div>
                     <p className="text-body-md font-bold">Enzo Silva</p>
@@ -81,13 +215,12 @@ export function Perfil() {
                 </div>
               </div>
 
-              {/* Dependent 2: Beatriz */}
               <div className="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-outline-variant">
                 <div className="flex items-center gap-md">
-                  <img 
-                    alt="Dependent profile" 
+                  <img
+                    alt="Dependent profile"
                     className="w-10 h-10 rounded-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVv7281kvkPUUfpCrp9Cn1M_g-FmhWEipMQ8f7rmFTXFxOvG6K0gL0K7Z-A66V4biNwvUyUXhpyJfnHqCo5h7x8GA4FKip1lTAAkCKYlHKZZi1i7gnyj7BbtHpHUrRYvAc_TXDh8gy-nRndzdimaG2CDuFOLt9VYLEFhwiLqa94w7YGmYfmfUV6w_NZyaQyMoisvakLJxI5PBrVyT3LB0NzY_phdKOu0yQlPs5x1hwxq0hH69qrAScTe-ifwhKvCIoqKcAK6wF5iY" 
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVv7281kvkPUUfpCrp9Cn1M_g-FmhWEipMQ8f7rmFTXFxOvG6K0gL0K7Z-A66V4biNwvUyUXhpyJfnHqCo5h7x8GA4FKip1lTAAkCKYlHKZZi1i7gnyj7BbtHpHUrRYvAc_TXDh8gy-nRndzdimaG2CDuFOLt9VYLEFhwiLqa94w7YGmYfmfUV6w_NZyaQyMoisvakLJxI5PBrVyT3LB0NzY_phdKOu0yQlPs5x1hwxq0hH69qrAScTe-ifwhKvCIoqKcAK6wF5iY"
                   />
                   <div>
                     <p className="text-body-md font-bold">Beatriz Silva</p>
@@ -105,26 +238,23 @@ export function Perfil() {
               </div>
             </div>
           </div>
-
         </section>
 
-        {/* Sidebar Content (L-Grid 5) */}
         <aside className="lg:col-span-5 flex flex-col gap-lg">
-          
-          {/* Digital Health Card */}
           <div className="relative bg-gradient-to-br from-primary to-on-primary-fixed-variant rounded-xl p-xl text-on-primary shadow-[0_8px_24px_rgba(0,88,188,0.25)] overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
-            
+
             <div className="relative z-10 flex flex-col gap-lg">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-title-md mb-xs">Digital Vax Card</h3>
-                  <p className="text-caption opacity-80 uppercase tracking-widest">Global Health ID</p>
+                  <p className="text-caption opacity-80 uppercase tracking-widest">
+                    Global Health ID
+                  </p>
                 </div>
                 <span className="material-symbols-outlined text-[32px]">contactless</span>
               </div>
 
-              {/* QR Code Placeholder */}
               <div className="bg-white p-sm rounded-lg self-center shadow-lg">
                 <div className="w-32 h-32 bg-surface-container-highest flex items-center justify-center border-2 border-dashed border-outline">
                   <span className="material-symbols-outlined text-on-surface-variant text-[48px]">
@@ -136,7 +266,9 @@ export function Perfil() {
               <div className="flex justify-between items-end border-t border-white/20 pt-md">
                 <div>
                   <p className="text-caption opacity-80">Holder</p>
-                  <p className="text-body-md font-bold uppercase">Ricardo Silva</p>
+                  <p className="text-body-md font-bold uppercase">
+                    {profile?.fullName || "Ricardo Silva"}
+                  </p>
                 </div>
                 <div className="text-right">
                   <p className="text-caption opacity-80">Valid Thru</p>
@@ -146,13 +278,14 @@ export function Perfil() {
             </div>
           </div>
 
-          {/* Administrative Controls */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
             <h2 className="text-title-md mb-lg">Account Settings</h2>
-            
+
             <div className="flex flex-col gap-sm">
-              {/* Security & Login */}
-              <button className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none">
+              <button
+                type="button"
+                className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none"
+              >
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary">
                   security
                 </span>
@@ -160,46 +293,60 @@ export function Perfil() {
                   <p className="text-label-sm font-bold">Security & Login</p>
                   <p className="text-caption text-on-surface-variant">Password, 2FA, and sessions</p>
                 </div>
-                <span className="material-symbols-outlined text-on-surface-variant">navigate_next</span>
+                <span className="material-symbols-outlined text-on-surface-variant">
+                  navigate_next
+                </span>
               </button>
 
-              {/* Notification Prefs */}
-              <button className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none">
+              <button
+                type="button"
+                className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none"
+              >
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary">
                   notifications_paused
                 </span>
                 <div className="flex-grow">
                   <p className="text-label-sm font-bold">Notification Prefs</p>
-                  <p className="text-caption text-on-surface-variant">Alerts and reminders frequency</p>
+                  <p className="text-caption text-on-surface-variant">
+                    Alerts and reminders frequency
+                  </p>
                 </div>
-                <span className="material-symbols-outlined text-on-surface-variant">navigate_next</span>
+                <span className="material-symbols-outlined text-on-surface-variant">
+                  navigate_next
+                </span>
               </button>
 
-              {/* Privacy & Data */}
-              <button className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none">
+              <button
+                type="button"
+                className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none"
+              >
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary">
                   folder_shared
                 </span>
                 <div className="flex-grow">
                   <p className="text-label-sm font-bold">Privacy & Data</p>
-                  <p className="text-caption text-on-surface-variant">Control who sees your health info</p>
+                  <p className="text-caption text-on-surface-variant">
+                    Control who sees your health info
+                  </p>
                 </div>
-                <span className="material-symbols-outlined text-on-surface-variant">navigate_next</span>
+                <span className="material-symbols-outlined text-on-surface-variant">
+                  navigate_next
+                </span>
               </button>
 
-              {/* Sign Out Action */}
               <div className="pt-md mt-md border-t border-outline-variant">
-                <button className="flex items-center gap-md p-md w-full text-left text-error hover:bg-error-container/20 transition-colors rounded-lg group outline-none">
+                <button
+                  type="button"
+                  className="flex items-center gap-md p-md w-full text-left text-error hover:bg-error-container/20 transition-colors rounded-lg group outline-none"
+                >
                   <span className="material-symbols-outlined">logout</span>
                   <p className="text-label-sm font-bold">Sign Out</p>
                 </button>
               </div>
             </div>
           </div>
-
         </aside>
       </div>
-
     </div>
   );
 }

@@ -1,7 +1,12 @@
 // src/pages/History.tsx
 import SearchBar from "./SearchBar";
 
-export function Historico() {
+interface historicoProps{
+  user_id : number;
+}
+
+export function Historico({user_id}: historicoProps) {
+  const currentUser = user_id
   return (
     <section className="p-lg max-w-[1200px] mx-auto w-full flex-grow">
       {/* Page Header Actions */}
@@ -44,7 +49,7 @@ export function Historico() {
         </a>
       </div>
       {/* Search and Filters Bar */}
-      <SearchBar />
+      <SearchBar user_id={currentUser}/>
     </section>
   );
 }

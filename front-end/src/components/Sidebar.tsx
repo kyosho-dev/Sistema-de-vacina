@@ -32,6 +32,11 @@ export function Sidebar() {
           <span className="text-label-sm">Buscar Vacinas</span>
         </Link>
         
+        <Link to="/cobertura" className={`${linkBaseStyle} ${isActive('/cobertura') ? activeStyle : inactiveStyle}`}>
+          <span className="material-symbols-outlined" data-icon="public">public</span>
+          <span className="text-label-sm">Mapa Cobertura Vacinal</span>
+        </Link>
+
         <Link to="/historico" className={`${linkBaseStyle} ${isActive('/historico') ? activeStyle : inactiveStyle}`}>
           <span className="material-symbols-outlined" data-icon="history">history</span>
           <span className="text-label-sm">Histórico</span>
