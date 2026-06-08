@@ -1,14 +1,80 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function AccountProfile() {
-  const [dateOfBirth] = useState("1982-10-24");
-  // CORRIGIDO: Adicionadas as variáveis de estado para a funcionalidade de edição de e-mail
-  const [email, setEmail] = useState("ricardo.silva@example.com");
+export default function AccountProfile({ idUsuarioLogado }) {
+  const [profile, setProfile] = useState(null);
+  const [email, setEmail] = useState("");
   const [isEditingEmail, setIsEditingEmail] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [savingEmail, setSavingEmail] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function loadProfile() {
+      try {
+        setLoading(true);
+        setError("");
+
+        if (!idUsuarioLogado) {
+          throw new Error("ID do usuário logado não informado.");
+        }
+
+        const response = await fetch(`/api/users/${idUsuarioLogado}`);
+
+        if (!response.ok) {
+          throw new Error("Não foi possível carregar o perfil.");
+        }
+
+        const data = await response.json();
+
+        setProfile(data);
+        setEmail(data.email || "");
+      } catch (err) {
+        setError(err.message || "Erro ao carregar perfil.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProfile();
+  }, [idUsuarioLogado]);
+
+  async function handleSaveEmail() {
+    try {
+      setSavingEmail(true);
+      setError("");
+
+      const response = await fetch(`/api/users/${idUsuarioLogado}/email`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Não foi possível atualizar o e-mail.");
+      }
+
+      const updated = await response.json();
+      setEmail(updated.email || email);
+      setIsEditingEmail(false);
+    } catch (err) {
+      setError(err.message || "Erro ao salvar e-mail.");
+    } finally {
+      setSavingEmail(false);
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="max-w-[1200px] mx-auto p-lg w-full">
+        <p className="text-body-md text-on-surface-variant">Carregando perfil...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-[1200px] mx-auto p-lg w-full">
-      {/* Breadcrumbs / Page Header */}
       <div className="mb-xl">
         <h1 className="text-headline-lg text-on-surface">Account Profile</h1>
         <p className="text-body-md text-on-surface-variant">
@@ -16,36 +82,42 @@ export default function AccountProfile() {
         </p>
       </div>
 
-      {/* Bento Grid Layout */}
+      {error && (
+        <div className="mb-lg rounded-lg border border-error/30 bg-error-container/20 p-md text-error">
+          {error}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg">
-        
-        {/* Personal Info Card & Dependents (L-Grid 7) */}
         <section className="lg:col-span-7 flex flex-col gap-lg">
-          
-          {/* Personal Information */}
-          {/* CORRIGIDO: Removida a tag de fechamento precoce que havia aqui */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)] border-l-4 border-primary">
             <div className="flex justify-between items-start mb-lg">
               <h2 className="text-title-md">Personal Information</h2>
-              <button className="text-primary text-label-sm flex items-center gap-xs hover:underline outline-none">
+              <button
+                type="button"
+                className="text-primary text-label-sm flex items-center gap-xs hover:underline outline-none"
+              >
                 <span className="material-symbols-outlined">edit</span> Edit
               </button>
             </div>
 
-            {/* CORRIGIDO: Removido o fechamento precoce para que os campos fiquem dentro do grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-xl">
               <div>
                 <label className="text-label-sm text-on-surface-variant block mb-xs">
                   Full Name
                 </label>
-                <p className="text-body-md font-semibold">Ricardo Silva</p>
+                <p className="text-body-md font-semibold">
+                  {profile?.fullName || `Usuário #${idUsuarioLogado}`}
+                </p>
               </div>
 
               <div>
                 <label className="text-label-sm text-on-surface-variant block mb-xs">
                   CPF (Tax ID)
                 </label>
-                <p className="text-body-md font-semibold">***.482.908-**</p>
+                <p className="text-body-md font-semibold">
+                  {profile?.cpf || "***.482.908-**"}
+                </p>
               </div>
 
               <div>
@@ -53,16 +125,16 @@ export default function AccountProfile() {
                   Date of Birth
                 </label>
                 <p className="text-body-md font-semibold">
-                  {new Date(dateOfBirth).toLocaleDateString("pt-BR")}
+                  {profile?.dateOfBirth
+                    ? new Date(profile.dateOfBirth).toLocaleDateString("pt-BR")
+                    : "-"}
                 </p>
               </div>
 
               <div>
-                <div>
-                  <label className="text-label-sm text-on-surface-variant block mb-xs">
-                    Email Address
-                  </label>
-                </div>
+                <label className="text-label-sm text-on-surface-variant block mb-xs">
+                  Email Address
+                </label>
 
                 {isEditingEmail ? (
                   <div className="flex flex-col gap-sm">
@@ -75,14 +147,18 @@ export default function AccountProfile() {
                     <div className="flex gap-sm">
                       <button
                         type="button"
-                        onClick={() => setIsEditingEmail(false)}
-                        className="px-md py-sm rounded-lg bg-primary text-on-primary"
+                        onClick={handleSaveEmail}
+                        disabled={savingEmail}
+                        className="px-md py-sm rounded-lg bg-primary text-on-primary disabled:opacity-60"
                       >
-                        Save
+                        {savingEmail ? "Saving..." : "Save"}
                       </button>
                       <button
                         type="button"
-                        onClick={() => setIsEditingEmail(false)}
+                        onClick={() => {
+                          setEmail(profile?.email || "");
+                          setIsEditingEmail(false);
+                        }}
                         className="px-md py-sm rounded-lg bg-surface-container-high text-on-surface"
                       >
                         Cancel
@@ -91,7 +167,7 @@ export default function AccountProfile() {
                   </div>
                 ) : (
                   <div className="flex items-center gap-sm">
-                    <p className="text-body-md font-semibold">{email}</p>
+                    <p className="text-body-md font-semibold">{email || "-"}</p>
                     <button
                       type="button"
                       onClick={() => setIsEditingEmail(true)}
@@ -105,11 +181,13 @@ export default function AccountProfile() {
             </div>
           </div>
 
-          {/* Dependents Management */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
             <div className="flex justify-between items-center mb-lg">
               <h2 className="text-title-md">Family Dependents</h2>
-              <button className="bg-secondary-container text-on-secondary-container px-md py-sm rounded-lg text-label-sm flex items-center gap-sm hover:opacity-90 transition-opacity outline-none">
+              <button
+                type="button"
+                className="bg-secondary-container text-on-secondary-container px-md py-sm rounded-lg text-label-sm flex items-center gap-sm hover:opacity-90 transition-opacity outline-none"
+              >
                 <span className="material-symbols-outlined">person_add</span> Add Dependent
               </button>
             </div>
@@ -160,12 +238,9 @@ export default function AccountProfile() {
               </div>
             </div>
           </div>
-          {/* CORRIGIDO: Removidas as tags </div> sobressalentes que quebravam o layout aqui */}
         </section>
 
-        {/* Sidebar Content (L-Grid 5) */}
         <aside className="lg:col-span-5 flex flex-col gap-lg">
-          {/* Digital Health Card */}
           <div className="relative bg-gradient-to-br from-primary to-on-primary-fixed-variant rounded-xl p-xl text-on-primary shadow-[0_8px_24px_rgba(0,88,188,0.25)] overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
 
@@ -191,7 +266,9 @@ export default function AccountProfile() {
               <div className="flex justify-between items-end border-t border-white/20 pt-md">
                 <div>
                   <p className="text-caption opacity-80">Holder</p>
-                  <p className="text-body-md font-bold uppercase">Ricardo Silva</p>
+                  <p className="text-body-md font-bold uppercase">
+                    {profile?.fullName || "Ricardo Silva"}
+                  </p>
                 </div>
                 <div className="text-right">
                   <p className="text-caption opacity-80">Valid Thru</p>
@@ -201,12 +278,14 @@ export default function AccountProfile() {
             </div>
           </div>
 
-          {/* Administrative Controls */}
           <div className="bg-surface-container-lowest rounded-xl p-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
             <h2 className="text-title-md mb-lg">Account Settings</h2>
 
             <div className="flex flex-col gap-sm">
-              <button className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none">
+              <button
+                type="button"
+                className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none"
+              >
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary">
                   security
                 </span>
@@ -219,7 +298,10 @@ export default function AccountProfile() {
                 </span>
               </button>
 
-              <button className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none">
+              <button
+                type="button"
+                className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none"
+              >
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary">
                   notifications_paused
                 </span>
@@ -234,7 +316,10 @@ export default function AccountProfile() {
                 </span>
               </button>
 
-              <button className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none">
+              <button
+                type="button"
+                className="flex items-center gap-md p-md w-full text-left hover:bg-surface-container-low transition-colors rounded-lg group outline-none"
+              >
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary">
                   folder_shared
                 </span>
@@ -250,7 +335,10 @@ export default function AccountProfile() {
               </button>
 
               <div className="pt-md mt-md border-t border-outline-variant">
-                <button className="flex items-center gap-md p-md w-full text-left text-error hover:bg-error-container/20 transition-colors rounded-lg group outline-none">
+                <button
+                  type="button"
+                  className="flex items-center gap-md p-md w-full text-left text-error hover:bg-error-container/20 transition-colors rounded-lg group outline-none"
+                >
                   <span className="material-symbols-outlined">logout</span>
                   <p className="text-label-sm font-bold">Sign Out</p>
                 </button>
@@ -258,7 +346,6 @@ export default function AccountProfile() {
             </div>
           </div>
         </aside>
-        
       </div>
     </div>
   );
