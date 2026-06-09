@@ -19,7 +19,7 @@ function AvisoCard({ id_user }: AvisoCardProp) {
             key={vacina.nomeVacina}
             className="bg-surface-container-lowest border-l-4 border-error rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)] p-lg flex flex-col md:flex-row gap-lg items-start md:items-center mb-md"
           >
-            <div className="flex-grow">
+            <div className="grow">
               <div className="flex items-center gap-sm mb-xs">
                 <span className="bg-error/10 text-error px-sm py-1 rounded text-caption font-bold uppercase tracking-wider">
                   Pendente

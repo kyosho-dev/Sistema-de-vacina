@@ -68,7 +68,9 @@ export default function AccountProfile({ idUsuarioLogado }) {
   if (loading) {
     return (
       <div className="max-w-[1200px] mx-auto p-lg w-full">
-        <p className="text-body-md text-on-surface-variant">Carregando perfil...</p>
+        <p className="text-body-md text-on-surface-variant">
+          Carregando perfil...
+        </p>
       </div>
     );
   }
@@ -188,7 +190,8 @@ export default function AccountProfile({ idUsuarioLogado }) {
                 type="button"
                 className="bg-secondary-container text-on-secondary-container px-md py-sm rounded-lg text-label-sm flex items-center gap-sm hover:opacity-90 transition-opacity outline-none"
               >
-                <span className="material-symbols-outlined">person_add</span> Add Dependent
+                <span className="material-symbols-outlined">person_add</span>{" "}
+                Add Dependent
               </button>
             </div>
 
@@ -202,7 +205,9 @@ export default function AccountProfile({ idUsuarioLogado }) {
                   />
                   <div>
                     <p className="text-body-md font-bold">Enzo Silva</p>
-                    <p className="text-caption text-on-surface-variant">Son • 8 years old</p>
+                    <p className="text-caption text-on-surface-variant">
+                      Son • 8 years old
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-sm">
@@ -224,7 +229,9 @@ export default function AccountProfile({ idUsuarioLogado }) {
                   />
                   <div>
                     <p className="text-body-md font-bold">Beatriz Silva</p>
-                    <p className="text-caption text-on-surface-variant">Daughter • 15 years old</p>
+                    <p className="text-caption text-on-surface-variant">
+                      Daughter • 15 years old
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-sm">
@@ -252,7 +259,9 @@ export default function AccountProfile({ idUsuarioLogado }) {
                     Global Health ID
                   </p>
                 </div>
-                <span className="material-symbols-outlined text-[32px]">contactless</span>
+                <span className="material-symbols-outlined text-[32px]">
+                  contactless
+                </span>
               </div>
 
               <div className="bg-white p-sm rounded-lg self-center shadow-lg">
@@ -291,7 +300,9 @@ export default function AccountProfile({ idUsuarioLogado }) {
                 </span>
                 <div className="flex-grow">
                   <p className="text-label-sm font-bold">Security & Login</p>
-                  <p className="text-caption text-on-surface-variant">Password, 2FA, and sessions</p>
+                  <p className="text-caption text-on-surface-variant">
+                    Password, 2FA, and sessions
+                  </p>
                 </div>
                 <span className="material-symbols-outlined text-on-surface-variant">
                   navigate_next

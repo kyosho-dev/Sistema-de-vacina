@@ -42,6 +42,26 @@ export const userVaccines = [
     vaccineId: 1,
     doseDate: new Date(2025, 6, 24),
   },
+  {
+    userId: 3,
+    vaccineId: 1,
+    doseDate: new Date(2025, 6, 24),
+  },
+  {
+    userId: 3,
+    vaccineId: 1,
+    doseDate: new Date(2025, 6, 24),
+  },
+  {
+    userId: 3,
+    vaccineId: 4,
+    doseDate: new Date(2025, 6, 24),
+  },
+  {
+    userId: 3,
+    vaccineId: 4,
+    doseDate: new Date(2025, 6, 24),
+  },
 
 
   {

@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout";
+import { useState } from "react";
 
 import { PainelPrincipal } from "./index/PainelPrincipal/PainelPrincipal";
 import { Historico } from "./index/Historico/Historico";
@@ -7,9 +8,10 @@ import { Alertas } from "./index/Alertas";
 import Perfil from "./index/Perfil";
 import { BuscarVacinas } from "./index/BuscarVacinas";
 import { PaginaMapaCobertura } from "./index/Dashboard/Map";
+import Configuraçoes from "./index/Configuraçoes/Configuraçoes";
 
 function App() {
-  const currentUserId = 4;
+  const [currentUserId, setCurrentUserId] = useState(1);
   return (
     <Layout>
       {/* O gerenciador de rotas decide dinamicamente o que renderizar aqui dentro */}
@@ -26,6 +28,10 @@ function App() {
         />
         <Route path="/buscarVacinas" element={<BuscarVacinas />} />
         <Route path="/cobertura" element={<PaginaMapaCobertura />} />
+        <Route
+          path="/configuracoes"
+          element={<Configuraçoes setCurrentUserId={setCurrentUserId} />}
+        />
       </Routes>
 
       {/* Footer fixa abaixo da troca de páginas */}

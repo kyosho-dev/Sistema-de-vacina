@@ -1,12 +1,9 @@
-import React from 'react';
-
 export function BuscarVacinas() {
   return (
-    <div className="flex-grow p-lg max-w-[1200px] mx-auto w-full">
+    <div className="grow p-lg max-w-1200px mx-auto w-full">
       <div className="grid grid-cols-12 gap-lg h-full">
         {/* Left Panel: Search Results & Info */}
         <div className="col-span-12 lg:col-span-4 flex flex-col gap-lg overflow-y-auto max-h-[calc(100vh-140px)] hide-scrollbar">
-          
           {/* Selected Vaccine Card */}
           <section className="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_12px_rgba(0,0,0,0.06)] border-l-4 border-primary">
             <div className="flex justify-between items-start mb-md">
@@ -18,12 +15,13 @@ export function BuscarVacinas() {
                   HPV (Papilomavírus Humano)
                 </h2>
               </div>
-              <span className="material-symbols-outlined text-primary">info</span>
+              <span className="material-symbols-outlined text-primary">
+                info
+              </span>
             </div>
             <p className="font-body-md text-body-md text-on-surface-variant mb-lg">
-              Protege contra os tipos mais comuns de HPV que podem causar
-              câncer do colo do útero, vulva, vagina e ânus, além de verrugas
-              genitais.
+              Protege contra os tipos mais comuns de HPV que podem causar câncer
+              do colo do útero, vulva, vagina e ânus, além de verrugas genitais.
             </p>
             <div className="space-y-sm">
               <div className="flex items-center gap-sm">
@@ -54,12 +52,12 @@ export function BuscarVacinas() {
             {/* Hospital Card 1 */}
             <div className="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:bg-surface-container-low transition-colors cursor-pointer border border-transparent hover:border-primary-fixed">
               <div className="flex gap-md">
-                <div className="bg-secondary-container rounded-lg w-12 h-12 flex items-center justify-center flex-shrink-0">
+                <div className="bg-secondary-container rounded-lg w-12 h-12 flex items-center justify-center shrink-0">
                   <span className="material-symbols-outlined text-on-secondary-container">
                     local_hospital
                   </span>
                 </div>
-                <div className="flex-grow">
+                <div className="grow">
                   <h4 className="font-body-lg text-body-lg font-semibold">
                     Hospital Sírio-Libanês
                   </h4>
@@ -82,12 +80,12 @@ export function BuscarVacinas() {
             {/* Hospital Card 2 */}
             <div className="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:bg-surface-container-low transition-colors cursor-pointer border border-transparent">
               <div className="flex gap-md">
-                <div className="bg-primary-fixed rounded-lg w-12 h-12 flex items-center justify-center flex-shrink-0">
+                <div className="bg-primary-fixed rounded-lg w-12 h-12 flex items-center justify-center shrink-0">
                   <span className="material-symbols-outlined text-on-primary-fixed">
                     vaccines
                   </span>
                 </div>
-                <div className="flex-grow">
+                <div className="grow">
                   <h4 className="font-body-lg text-body-lg font-semibold">
                     Clínica de Vacinação Imune
                   </h4>
@@ -110,12 +108,12 @@ export function BuscarVacinas() {
             {/* Hospital Card 3 */}
             <div className="bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:bg-surface-container-low transition-colors cursor-pointer border border-transparent">
               <div className="flex gap-md">
-                <div className="bg-tertiary-fixed rounded-lg w-12 h-12 flex items-center justify-center flex-shrink-0">
+                <div className="bg-tertiary-fixed rounded-lg w-12 h-12 flex items-center justify-center shrink-0">
                   <span className="material-symbols-outlined text-on-tertiary-fixed">
                     medical_services
                   </span>
                 </div>
-                <div className="flex-grow">
+                <div className="grow">
                   <h4 className="font-body-lg text-body-lg font-semibold">
                     Hospital Santa Catarina
                   </h4>
@@ -143,8 +141,7 @@ export function BuscarVacinas() {
 
         {/* Right Panel: Interactive Map Area */}
         <div className="col-span-12 lg:col-span-8 flex flex-col gap-lg h-full">
-          <div className="relative w-full h-[500px] lg:h-full min-h-[400px] bg-surface-container-low rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.1)] border border-outline-variant">
-            
+          <div className="relative w-full h-500px lg:h-full min-h-400px bg-surface-container-low rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.1)] border border-outline-variant">
             {/* Simulated Map Interface */}
             <img
               alt="Map View"
@@ -159,7 +156,9 @@ export function BuscarVacinas() {
               <div className="flex flex-col h-full justify-between">
                 <div className="flex justify-end gap-sm pointer-events-auto">
                   <button className="bg-surface rounded-lg p-sm shadow-md border border-outline-variant">
-                    <span className="material-symbols-outlined">my_location</span>
+                    <span className="material-symbols-outlined">
+                      my_location
+                    </span>
                   </button>
                   <button className="bg-surface rounded-lg p-sm shadow-md border border-outline-variant">
                     <span className="material-symbols-outlined">layers</span>
@@ -207,7 +206,6 @@ export function BuscarVacinas() {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

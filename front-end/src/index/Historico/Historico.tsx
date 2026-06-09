@@ -8,7 +8,7 @@ interface historicoProps{
 export function Historico({user_id}: historicoProps) {
   const currentUser = user_id
   return (
-    <section className="p-lg max-w-[1200px] mx-auto w-full flex-grow">
+    <section className="p-lg max-w-1200px mx-auto w-full grow">
       {/* Page Header Actions */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-xl">
         <div>
