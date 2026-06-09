@@ -9,15 +9,21 @@ import { BuscarVacinas } from "./index/BuscarVacinas";
 import { PaginaMapaCobertura } from "./index/Dashboard/Map";
 
 function App() {
-  const currentUserId = 2;
+  const currentUserId = 4;
   return (
     <Layout>
       {/* O gerenciador de rotas decide dinamicamente o que renderizar aqui dentro */}
       <Routes>
         <Route path="/" element={<PainelPrincipal user_id={currentUserId} />} />
-        <Route path="/historico" element={<Historico user_id={currentUserId} />}/>
-        <Route path="/alertas" element={<Alertas user_id={currentUserId}/>} />
-        <Route path="/perfil" element={<Perfil idUsuarioLogado={currentUserId}/>} />
+        <Route
+          path="/historico"
+          element={<Historico user_id={currentUserId} />}
+        />
+        <Route path="/alertas" element={<Alertas user_id={currentUserId} />} />
+        <Route
+          path="/perfil"
+          element={<Perfil idUsuarioLogado={currentUserId} />}
+        />
         <Route path="/buscarVacinas" element={<BuscarVacinas />} />
         <Route path="/cobertura" element={<PaginaMapaCobertura />} />
       </Routes>

@@ -18,14 +18,16 @@ export interface User {
   familyMembers: FamilyMember[];
 }
 
-export const users: User[] = [  {
+export const users: User[] = [
+  {
     id: 1,
     name: "Ricardo Silva",
     birthDate: "15/02/1983",
     email: "ricardo@email.com",
     cpf: "123.456.789-00",
     ageMonths: 516,
-    familyMembers: [      {
+    familyMembers: [
+      {
         id: 2,
         name: "Pedro Exemplo",
         birthDate: "16/05/1998",
@@ -45,5 +47,13 @@ export const users: User[] = [  {
     ageMonths: 1188,
     familyMembers: [],
   },
+  {
+    id: 4,
+    name: "joão Machado De Assis",
+    birthDate: "22/04/1926",
+    email: "joaomachadogrande@email.com",
+    cpf: "111.222.333-44",
+    ageMonths: 1188,
+    familyMembers: [],
+  },
 ];
-

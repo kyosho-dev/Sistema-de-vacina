@@ -2,6 +2,7 @@
 import React from "react";
 import ProgressMini from "./Alertas/ProgressoMini";
 import DicasDeSaude from "./Alertas/DicasDeSaude";
+import AvisosCard from "./Alertas/AvisosCard";
 
 interface AlertasPros {
   user_id: number;
@@ -27,56 +28,9 @@ export function Alertas({ user_id }: AlertasPros) {
             2 Urgentes
           </span>
         </div>
+        {/*Aqui deveria ficr os aviso card */}
+        <AvisosCard id_user={current_id}/>
 
-        {/* Alert Card 1: Tetanus */}
-        <div className="bg-surface-container-lowest border-l-4 border-error rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)] p-lg flex flex-col md:flex-row gap-lg items-start md:items-center">
-          <div className="flex-grow">
-            <div className="flex items-center gap-sm mb-xs">
-              <span className="bg-error/10 text-error px-sm py-1 rounded text-caption font-bold uppercase tracking-wider">
-                Vencido
-              </span>
-              <h4 className="text-title-md text-on-surface">
-                Reforço Anti-Tétano
-              </h4>
-            </div>
-            <p className="text-body-md text-on-surface-variant">
-              Sua última vacina Anti-Tétano foi a 11 anos atrás. Uma nova dose é
-              recomendada a cada 10 anos para manter sua imunidade.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-md w-full md:w-auto">
-            <button className="bg-primary text-on-primary text-label-sm px-lg py-md rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap">
-              Agendar agora
-            </button>
-            <button className="bg-primary-fixed text-on-primary-fixed-variant text-label-sm px-lg py-md rounded-lg hover:bg-primary-fixed-dim transition-colors whitespace-nowrap">
-              Ver locais
-            </button>
-          </div>
-        </div>
-
-        {/* Alert Card 2: Dengue */}
-        <div className="bg-surface-container-lowest border-l-4 border-tertiary rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.06)] p-lg flex flex-col md:flex-row gap-lg items-start md:items-center">
-          <div className="flex-grow">
-            <div className="flex items-center gap-sm mb-xs">
-              <span className="bg-tertiary-container/10 text-tertiary px-sm py-1 rounded text-caption font-bold uppercase tracking-wider">
-                A vencer
-              </span>
-              <h4 className="text-title-md text-on-surface">Dengue (Dose 2)</h4>
-            </div>
-            <p className="text-body-md text-on-surface-variant">
-              Sua segunda dose deve ser tomada em até 5 dias. Deixar sua
-              carteira sempre completa garante uma maior imunidade.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-md w-full md:w-auto">
-            <button className="bg-primary text-on-primary text-label-sm px-lg py-md rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap">
-              Agendar agora
-            </button>
-            <button className="bg-primary-fixed text-on-primary-fixed-variant text-label-sm px-lg py-md rounded-lg hover:bg-primary-fixed-dim transition-colors whitespace-nowrap">
-              Ver locais
-            </button>
-          </div>
-        </div>
 
         {/* Notification History */}
         <div className="mt-xl">

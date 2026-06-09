@@ -11,9 +11,7 @@ interface VaccineCardProps {
 function VaccineCard({ vaccine_id, user_id }: VaccineCardProps) {
   const currentUser = users.find((u) => u.id === user_id);
 
-  const currentVaccine = vaccines.find(
-    (vaccine) => vaccine.id === vaccine_id,
-  );
+  const currentVaccine = vaccines.find((vaccine) => vaccine.id === vaccine_id);
 
   const takenDoses = userVaccines.filter(
     (uv) => uv.userId === user_id && uv.vaccineId === vaccine_id,
@@ -57,16 +55,12 @@ function VaccineCard({ vaccine_id, user_id }: VaccineCardProps) {
 
             <div className="card-actions-unique">
               <button className="action-btn">
-                <span className="material-symbols-outlined">
-                  visibility
-                </span>
+                <span className="material-symbols-outlined">visibility</span>
                 View Details
               </button>
 
               <button className="action-btn">
-                <span className="material-symbols-outlined">
-                  share
-                </span>
+                <span className="material-symbols-outlined">share</span>
                 Share QR Code
               </button>
             </div>
@@ -85,7 +79,7 @@ function VaccineCard({ vaccine_id, user_id }: VaccineCardProps) {
 
                 <div>
                   <h3 className="card-title">{currentVaccine.name}</h3>
-                  <span className="badge">Complete Schedule</span>
+                  <span className="badge">Vacina com varias doses</span>
                 </div>
               </div>
             </div>
@@ -93,9 +87,7 @@ function VaccineCard({ vaccine_id, user_id }: VaccineCardProps) {
             <div className="card-grid">
               {takenDoses.map((dose, index) => (
                 <div key={index} className="dose-box">
-                  <p className="dose-label">
-                    Dose {index + 1}
-                  </p>
+                  <p className="dose-label">Dose {index + 1}</p>
 
                   <p className="dose-date">
                     {dose.doseDate.toLocaleDateString("pt-BR")}
@@ -108,16 +100,12 @@ function VaccineCard({ vaccine_id, user_id }: VaccineCardProps) {
 
             <div className="card-actions">
               <button className="action-btn">
-                <span className="material-symbols-outlined">
-                  visibility
-                </span>
+                <span className="material-symbols-outlined">visibility</span>
                 View Details
               </button>
 
               <button className="action-btn">
-                <span className="material-symbols-outlined">
-                  share
-                </span>
+                <span className="material-symbols-outlined">share</span>
                 Share QR Code
               </button>
             </div>

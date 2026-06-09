@@ -28,4 +28,11 @@ export const vaccines: Vaccine[] = [
     maxAge: 35,
     uniqueDose: true
   },
+  {
+    id: 4,
+    name: "dT",
+    minAgeMonths: 400,
+    maxAge: 120,
+    uniqueDose: false
+  },
 ];
